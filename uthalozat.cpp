@@ -1,4 +1,5 @@
 #include <iostream>
+#include <lemon/concepts/graph.h>
 #include <lemon/list_graph.h>
 #include <lemon/lgf_reader.h>
 #include <lemon/dim2.h>
@@ -9,20 +10,21 @@ using namespace lemon;
 
 int main()
 {
-  ListGraph g;
-  ListGraph::NodeMap< dim2::Point<int> > coord(g);
-  ListGraph::ArcMap<int> length(g);
-  ListGraph::Node src;
-  std::string title;
+ ListGraph g;
+ ListGraph::NodeMap<int> lat(g);
+ ListGraph::NodeMap<int> lon(g);
+ ListGraph::Node nodes;
+ ListGraph::ArcMap<int> length(g);
+ ListGraph::ArcMap<int> maxspeed(g);
 
-  digraphReader(g, "hun.lgf")
-    .nodeMap("coordinate", coord)
-    .arcMap("length", length)
-    .node("source", src)
-    .attribute("caption", title)
-    .run(); 
+ graphReader(g,"hun.lgf")
+	.nodeMap("lat",lat)
+	.nodeMap("lon",lon)
+	.arcMap("lengh",length)
+	.arcMap("mazspeed",maxspeed)
+	.run();
 
-  int c;
-  std::cin >> c;
-  return 0;
+ int c;
+ std::cin >> c;
+ return 0;
 }

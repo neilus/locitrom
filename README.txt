@@ -6,7 +6,7 @@ Mivel lustaság fél egészség írtam egy szép Makefilet:
 a könyvtárban kiadott make parancs linux/unix/cygwin alatt (már ha van pl autotools, gcc, wget, stb ) letölti a kísérleteim során használt lemon library tar-ballt, a lemon honlapjáról, kicsomagolja és megpróbálja installálni is. 
 tehát miután letöltötted a következő a dolgod:
 <pre><code>
-	cd lemon
+	cd locitrom
 	make
 </code></pre>
 Az installált lib, a könyvtárstruktúrában a relatív lemon könyvtár alatt lesz ezután. A Makefile-ban a target-ek fordítási szabályai, használják ezt a libraryt, így ha már van lemon a gépeden, célszerű lesz átírnod a Makefile-t.

@@ -1,3 +1,13 @@
+lemon
+lemon/*
+lemon-1.2
+lemon-1.2/*
+hun.lgf
+*.zip
+*.gz
+*.bz
+*.bz2
+
 #################
 ## Eclipse
 #################

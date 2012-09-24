@@ -9,10 +9,10 @@ Ezt az egáesz mókát az ELTÉn 2012 őszi félévében indított Alkalmazott m
 [http://lemon.cs.elte.hu/trac/lemon/wiki/AlkMod2012 tárgy linkje] miatt kezdtem el, ezért is a könnyítések. A programok jelenleg paraméter nélkül futnak, nem user számára készültek. A futásukhoz szükséges fájlokat általában letöltetem a Makefile-ból függőségként, így ne aggódj, hogy ilyen pici (legalább a git nem túl lassú)
 
 Hogyha saját kódot szeretnél írni és a Make-szkriptem által telepített lemon-t szeretnéd használni, akkor (felteszem a repó könyvtárába hozod létre a fájlt, így:) 
-{{{
+<pre>
 	g++ -o kimeneti-binaris-neve forrásfájlod.cpp -I lemon/include/ -L lemon/lib/ -lemon
-}}}
-szóval a {{{-I lemon/include/ -L lemon/lib/ -lemon}}} rész kell a fordítónak, hogy tudja hol keresse a lemont, meg hogy egyáltalán keresse.
+</pre>
+szóval a <pre>-I lemon/include/ -L lemon/lib/ -lemon</pre> rész kell a fordítónak, hogy tudja hol keresse a lemont, meg hogy egyáltalán keresse.
 
 Az itteni tartalmakat a GNU/GPL licensze alatt teszem közre (ha jól emlékszem az eredeti forrás is így tett), ami azt jelenti, hogy játszhatsz kedvedre a kóddal ahogy csak akarsz, de ha publikálod vagy másnak odaadod az eredetit vagy az általad módosított változatát, meg kell nevezd az eredeti forrást és neked is GPL licensz alatt kell továbbadnod a kódot.
 

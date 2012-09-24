@@ -3,7 +3,36 @@ lócitrom - avagy elsõ lépéseim a lemon c++ library-val való ismerkedéskor:
 Amit itt találni lehet azok, a lemon tutoriálból, illetve dokumentációból lemásolt demó kódok, néhol lehet módosítottam is, nem vezetem mivel ez tényleg csak a kis saját játszóterem...
 
 Mivel lustaság fél egészség írtam egy szép Makefilet: 
-a könyvtárban kiadott make parancs linux/unix/cygwin alatt (már ha van pl autotools, gcc, wget, stb ) letölti a kísérleteim során használt lemon library tar-ballt, a lemon honlapjáról, kicsomagolja és megpróbálja installálni is. Az installált lib, a könyvtárstruktúrában a relatív lemon könyvtár alatt lesz ezután. A Makefile-ban a target-ek fordítási szabályai, használják ezt a libraryt, így ha már van lemon a gépeden, célszerű lesz átírnod a Makefile-t.
+a könyvtárban kiadott make parancs linux/unix/cygwin alatt (már ha van pl autotools, gcc, wget, stb ) letölti a kísérleteim során használt lemon library tar-ballt, a lemon honlapjáról, kicsomagolja és megpróbálja installálni is. 
+tehát miután letöltötted a következő a dolgod:
+<pre><code>
+	cd lemon
+	make
+</code></pre>
+Az installált lib, a könyvtárstruktúrában a relatív lemon könyvtár alatt lesz ezután. A Makefile-ban a target-ek fordítási szabályai, használják ezt a libraryt, így ha már van lemon a gépeden, célszerű lesz átírnod a Makefile-t.
+
+kicsit vizuálisabban, a make parancs után a locitrom könyvtár nagyjából így kell, hogy kinézzen:
+<pre>
+locitrom +--lemon + --lib
+		 |		  + --include
+		 |		  + --bin
+		 |
+		 +--README.md
+		 +--README.txt
+		 +--Makefile
+		 +--install-lemon.sh
+		 |
+		 +--hello.cpp
+		 +--hello.exe
+		 |
+		 +--digraph.lgf
+		 +--digraph.cpp
+		 +--digraph.exe
+		 |
+		 +--hun.lgf
+		 +--uthalozat.cpp
+		 +--uthalozat.exe
+</pre>
 
 Ezt az egáesz mókát az ELTÉn 2012 őszi félévében indított Alkalmazott modul 1 - Hálózati folyamok ... 
 [tárgy miatt] (http://lemon.cs.elte.hu/trac/lemon/wiki/AlkMod2012)kezdtem el, ezért is a könnyítések. A programok jelenleg paraméter nélkül futnak, nem user számára készültek. A futásukhoz szükséges fájlokat általában letöltetem a Makefile-ból függőségként, így ne aggódj, hogy ilyen pici (legalább a git nem túl lassú)

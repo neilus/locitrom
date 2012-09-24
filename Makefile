@@ -18,6 +18,9 @@ lemon: lemon-1.2
 hello: hello.cpp lemon
 	g++ -o hello hello.cpp  -I lemon/include/ -L lemon/lib/ -lemon
 
+digraph: digraph.cpp lemon
+	g++ -o digraph digraph.cpp  -I lemon/include/ -L lemon/lib/ -lemon
+
 gyakorlo: gyakorlo.cpp lemon
 	g++ -o gyakorlo gyakorlo.cpp -I lemon/include/ -L lemon/lib/ -lemon
 

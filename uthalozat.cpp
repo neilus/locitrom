@@ -1,6 +1,7 @@
 #include <iostream>
 #include <lemon/concepts/graph.h>
 #include <lemon/list_graph.h>
+#include <lemon/smart_graph.h>
 #include <lemon/lgf_reader.h>
 #include <lemon/dim2.h>
 
@@ -10,30 +11,38 @@ using namespace lemon;
 
 int main()
 {
- ListGraph g;
- ListGraph::Node nodes;
- ListGraph::Arc	 arcs;
- ListGraph::NodeMap<int> label(g);
- ListGraph::NodeMap<double> lat(g);
- ListGraph::NodeMap<double> lon(g);
- ListGraph::ArcMap<int> length(g);
- ListGraph::ArcMap<int> maxspeed(g);
+ SmartGraph g;
+ SmartGraph::Node nodes;
+ SmartGraph::Arc	 arcs;
+ SmartGraph::NodeMap<int> label(g);
+ SmartGraph::NodeMap<double> lat(g);
+ SmartGraph::NodeMap<double> lon(g);
+ SmartGraph::EdgeMap<int> length(g);
+ SmartGraph::EdgeMap<int> maxspeed(g);
 
- graphReader(g,"hun.lgf")
-	//.arcMap("length",length)
-	//.arcMap("maxspeed",maxspeed)
-	.nodeMap("label",label)
-	.nodeMap("lat",lat)
-	.nodeMap("lon",lon)
-// valamiert az elek hossza es a sebessegkorlatot 
-// nem tudom igy beolvasni, otlet? hogy kene maskepp?
-	//.edgeMap("length",length)
-	//.edgeMap("maxspeed",maxspeed)
-	.run();
+ try {
+	 graphReader(g,"hun.lgf")
+		.edgeMap("length",length)
+		.edgeMap("maxspeed",maxspeed)
+		.nodeMap("label",label)
+		.nodeMap("lat",lat)
+		.nodeMap("lon",lon)
+		.run();
+	 } catch (Exception& error) { // check if there was any error
+    std::cerr << "Error: " << error.what() << std::endl;
+    return -1;
+  	}
  
  std::cerr << "\n\tA beolvasas lefutott...\n";
+  std::cerr << "A digraph is read from 'hun.lgf'." << std::endl;
+  std::cerr << "Number of nodes: " << countNodes(g) << std::endl;
+  std::cerr << "Number of arcs: " << countArcs(g) << std::endl;
+
+  std::cerr << "We can write it to the standard output:" << std::endl;
 
  graphWriter(g)
+	.edgeMap("length",length)
+	.edgeMap("maxspeed",maxspeed)
 	.nodeMap("label",label)
 	.nodeMap("lat",lat)
 	.nodeMap("lon",lon)

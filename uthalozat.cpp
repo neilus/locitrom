@@ -7,7 +7,7 @@
 #include <lemon/dfs.h>
 
 using namespace lemon;
-//using namespace std;
+using namespace std;
 //using namespace lemon::dim2;
 
 int main()
@@ -21,7 +21,6 @@ int main()
  SmartGraph::EdgeMap<int> length(g);
  SmartGraph::EdgeMap<int> maxspeed(g);
 
- Dfs::ReachedMap<SmartGraph> reached(g);
 
 
  try {
@@ -33,24 +32,30 @@ int main()
 		.nodeMap("lon",lon)
 		.run();
 	 } catch (Exception& error) { // check if there was any error
-    std::cerr << "Error: " << error.what() << std::endl;
+    cerr << "Error: " << error.what() << endl;
     return -1;
   	}
  
- std::cerr << "\n\tA beolvasas lefutott...\n";
- std::cerr << "A digraph is read from 'hun.lgf'." << std::endl;
- std::cerr << "Number of nodes: " << countNodes(g) << std::endl;
- std::cerr << "Number of arcs: " << countArcs(g) << std::endl;
+ cerr << "\n\tA beolvasas lefutott...\n";
+ cerr << "A digraph is read from 'hun.lgf'." << endl;
+ cerr << "Number of nodes: " << countNodes(g) << endl;
+ cerr << "Number of arcs: " << countArcs(g) << endl;
 
- std::cerr << "We can write it to the standard output:" << std::endl;
+ cerr << "We can write it to the standard output:" << endl;
  //SmartDigraph d(g);
- Dfs<SmartGraph> tree(g);
+ Dfs<SmartGraph> dfs(g);
+ //Dfs::ReachedMap<SmartGraph> reached(dfs);
  // tree.reachedMap();
- tree.run();
- //int reached = 0;
- for (SmartGraph::NodeIt i(g); i != INVALID; ++i)
- 	reached += (i.reached)? 1:0;
- std::cerr << "We have reached " << reached " nodes during DFS" << endl;
+ dfs.run();
+ int reached = 0;
+ for (SmartGraph::NodeIt i(g); i != INVALID; ++i){
+ 	if( dfs.reached(i) ) {
+		reached ++;
+//		cerr << g.id(i) << "\t";
+	}
+ }
+
+ cerr << "\nWe have reached " << reached << " nodes during DFS" << endl;
 //  countNodes( tree.predMap() );
 
 
@@ -62,6 +67,6 @@ int main()
 // 	.nodeMap("lon",lon)
 // 	.run();
 
- std::cerr << "\n kesz vagyok\n";
+ cerr << "\n kesz vagyok\n";
  return 0;
 }

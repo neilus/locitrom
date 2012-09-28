@@ -8,23 +8,21 @@
 
 using namespace lemon;
 using namespace std;
-//using namespace lemon::dim2;
 
-int main()
+int main(int argc, char*argv[])
 {
- SmartGraph g;
- SmartGraph::Node nodes;
- SmartGraph::Arc	 arcs;
- SmartGraph::NodeMap<int> label(g);
- SmartGraph::NodeMap<double> lat(g);
- SmartGraph::NodeMap<double> lon(g);
- SmartGraph::EdgeMap<int> length(g);
- SmartGraph::EdgeMap<int> maxspeed(g);
-
+ ListGraph g;
+ ListGraph::Node nodes;
+ ListGraph::Arc	 arcs;
+ ListGraph::NodeMap<int> label(g);
+ ListGraph::NodeMap<double> lat(g);
+ ListGraph::NodeMap<double> lon(g);
+ ListGraph::EdgeMap<int> length(g);
+ ListGraph::EdgeMap<int> maxspeed(g);
 
 
  try {
-	 graphReader(g,"hun.lgf")
+	 graphReader(g, ( (argc != 2)?"hun.lgf":argv[1] ) )
 		.edgeMap("length",length)
 		.edgeMap("maxspeed",maxspeed)
 		.nodeMap("label",label)
@@ -43,12 +41,12 @@ int main()
 
  cerr << "We can write it to the standard output:" << endl;
  //SmartDigraph d(g);
- Dfs<SmartGraph> dfs(g);
- //Dfs::ReachedMap<SmartGraph> reached(dfs);
+ Dfs<ListGraph> dfs(g);
+ //Dfs::ReachedMap<ListGraph> reached(dfs);
  // tree.reachedMap();
  dfs.run();
  int reached = 0;
- for (SmartGraph::NodeIt i(g); i != INVALID; ++i){
+ for (ListGraph::NodeIt i(g); i != INVALID; ++i){
  	if( dfs.reached(i) ) {
 		reached ++;
 //		cerr << g.id(i) << "\t";

@@ -1,4 +1,4 @@
-all:hello gyakorlo uthalozat digraph lemon
+all: uthalozat
 	
 clean:
 	rm -rf lemon-1.2 hun.lgf.zip hello gyakorlo uthalozat digraph

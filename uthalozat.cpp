@@ -4,6 +4,7 @@
 #include <lemon/smart_graph.h>
 #include <lemon/lgf_reader.h>
 #include <lemon/dim2.h>
+#include <lemon/dfs.h>
 
 using namespace lemon;
 //using namespace std;
@@ -20,6 +21,9 @@ int main()
  SmartGraph::EdgeMap<int> length(g);
  SmartGraph::EdgeMap<int> maxspeed(g);
 
+ Dfs::ReachedMap<SmartGraph> reached(g);
+
+
  try {
 	 graphReader(g,"hun.lgf")
 		.edgeMap("length",length)
@@ -34,19 +38,29 @@ int main()
   	}
  
  std::cerr << "\n\tA beolvasas lefutott...\n";
-  std::cerr << "A digraph is read from 'hun.lgf'." << std::endl;
-  std::cerr << "Number of nodes: " << countNodes(g) << std::endl;
-  std::cerr << "Number of arcs: " << countArcs(g) << std::endl;
+ std::cerr << "A digraph is read from 'hun.lgf'." << std::endl;
+ std::cerr << "Number of nodes: " << countNodes(g) << std::endl;
+ std::cerr << "Number of arcs: " << countArcs(g) << std::endl;
 
-  std::cerr << "We can write it to the standard output:" << std::endl;
+ std::cerr << "We can write it to the standard output:" << std::endl;
+ //SmartDigraph d(g);
+ Dfs<SmartGraph> tree(g);
+ // tree.reachedMap();
+ tree.run();
+ //int reached = 0;
+ for (SmartGraph::NodeIt i(g); i != INVALID; ++i)
+ 	reached += (i.reached)? 1:0;
+ std::cerr << "We have reached " << reached " nodes during DFS" << endl;
+//  countNodes( tree.predMap() );
 
- graphWriter(g)
-	.edgeMap("length",length)
-	.edgeMap("maxspeed",maxspeed)
-	.nodeMap("label",label)
-	.nodeMap("lat",lat)
-	.nodeMap("lon",lon)
-	.run();
+
+//  graphWriter(tree)
+// 	.edgeMap("length",length)
+// 	.edgeMap("maxspeed",maxspeed)
+// 	.nodeMap("label",label)
+// 	.nodeMap("lat",lat)
+// 	.nodeMap("lon",lon)
+// 	.run();
 
  std::cerr << "\n kesz vagyok\n";
  return 0;

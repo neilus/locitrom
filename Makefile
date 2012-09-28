@@ -1,11 +1,11 @@
-all:hello gyakorlo uthalozat digraph
-
+all:hello gyakorlo uthalozat digraph lemon
+	
 clean:
-	rm -rf lemon-1.2 hun.lgf.zip hello gyakorlo uthalozat 
+	rm -rf lemon-1.2 hun.lgf.zip hello gyakorlo uthalozat digraph
 dist-clean: clean
 	rm -rf lemon 
 deep-clean: dist-clean
-	rm -rf hun.lgf lemon-1.2.tar.gz  win-lib
+	rm -rf hun.lgf lemon-1.2.tar.gz  win-lib lemon-linux lemon-cygwin
 linux-lib: lemon-linux
 	rm -rf lemon
 	cp -rl lemon-linux lemon 
@@ -15,7 +15,8 @@ cygwin-lib: lemon-cygwin
 hun.lgf.zip:
 	wget http://lemon.cs.elte.hu/trac/lemon/raw-attachment/wiki/AlkMod2012/hun.lgf.zip
 hun.lgf: hun.lgf.zip
-	unzip hun.lgf.zip
+	unzip -o hun.lgf.zip
+	touch hun.lgf
 lemon-1.2.tar.gz:
 	wget http://lemon.cs.elte.hu/pub/sources/lemon-1.2.tar.gz
 lemon-1.2: lemon-1.2.tar.gz

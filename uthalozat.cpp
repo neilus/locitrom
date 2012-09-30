@@ -22,8 +22,8 @@ int main(int argc, char*argv[])
 
  ListGraph::NodeMap<bool> visited(g);
 
- string filename = ( (argc != 2)?"hun.lgf":argv[1] )  ;
- cerr << "Start to process file:  "<< filename << endl;
+ string filename = ( (argc < 2)?"hun.lgf":argv[1] )  ;
+ cout << "A "<< filename <<" fájlt elkezdem feldolgozni (ez eltarthat egy jódarabig)"<< endl;
  try {
 	 graphReader(g, filename.c_str())
 		.edgeMap("length",length)
@@ -33,16 +33,16 @@ int main(int argc, char*argv[])
 		.nodeMap("lon",lon)
 		.run();
 	 } catch (Exception& error) { // check if there was any error
-    cerr << "Error: " << error.what() << endl;
+    cout << "Error: " << error.what() << endl;
     return -1;
   	}
  
- cerr << "\n\tthe graph has been read from the file...\n";
- // adding a 1-node island in to the graph we just read ... for fun and control
- // ListGraph::Node island = g.addNode();
+// cout << "\n\tthe graph has been read from the file...\n";
+// adding a 1-node island in to the graph we just read ... for fun and control
+// ListGraph::Node island = g.addNode();
  int SumNodes = countNodes(g);
-// cerr << "Number of arcs: " << countArcs(g) << endl;
-// cerr << "\tNumber of nodes: \t" << SumNodes << endl;
+// cout << "Number of arcs: " << countArcs(g) << endl;
+// cout << "\tNumber of nodes: \t" << SumNodes << endl;
 // for (ListGraph::NodeIt i(g); i != INVALID; ++i)
 //	visited[i]=false;
  
@@ -67,11 +67,10 @@ int main(int argc, char*argv[])
 	unreached -= reached;
 	components.push_back(reached);
 	max = ( max < reached)? reached:max;
-	cerr << "\n\t" << reached << " nodes reached,\t"<< unreached <<" nodes to go\t";
+//	cout << "\n\t" << reached << " nodes reached,\t"<< unreached <<" nodes to go\t";
  } while( unreached > 0 && !visited[s] );
  SumNodes = countNodes(g);
- cerr << "\nTotal number of nodes: \t\t\t" << SumNodes << endl;
- cerr << "\nI just found " << components.size() << " components in the graph, and the biggest one has " << max << " nodes\n";
- cerr << "\n all done\n";
+ cout << "\nA gráfban található csúcsok száma: \t\t\t" << SumNodes << endl;
+ cout << endl << components.size() << " komponenst találtam a gráfban, melyek közül a legnagyonbb " << max << " csúcsot tartalmaz\n";
  return 0;
 }

@@ -24,6 +24,7 @@ lemon-1.2: lemon-1.2.tar.gz
 lemon: lemon-1.2
 	rm -rf lemon
 	./install-lemon.sh "-`(uname -a|grep -i linux >/dev/null && echo linux) || (uname -a|grep -i cygwin >/dev/null && echo cygwin)`"
+	rm -rf lemon-1.2
 lemonpath:
 	make lemon
 hello: lemonpath hello.cpp 

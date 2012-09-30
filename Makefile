@@ -54,6 +54,9 @@ digraph: lemonpath digraph.cpp
 gyakorlo: lemonpath gyakorlo.cpp 
 	g++ -o gyakorlo gyakorlo.cpp -I `cat lemonpath` -L `cat lemonpath` -lemon
 
+gyakorlo-dir: lemonpath gyakorlo-dir.cpp 
+	g++ -o gyakorlo-dir gyakorlo-dir.cpp -I `cat lemonpath` -L `cat lemonpath` -lemon
+
 uthalozat: uthalozat-undir
 	cp -fl uthalozat-undir uthalozat
 

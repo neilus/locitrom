@@ -1,13 +1,13 @@
-all: uthalozat hun.lgf hun-undir.lgf
+all: uthalozat uthalozat-undir uthalozat-di hun.lgf hun-undir.lgf
 	
 clean:
-	rm -rf lemon-1.2 hun.lgf.zip hello gyakorlo uthalozat digraph
+	rm -rf lemon-1.2 hun.lgf.zip hun-undir.lgf.zip hello gyakorlo uthalozat digraph uthalozat-di uthalozat-undir
 
 dist-clean: clean
 	rm -rf lemon 
 
 deep-clean: dist-clean
-	rm -rf hun.lgf lemon-1.2.tar.gz  win-lib lemon-linux lemon-cygwin
+	rm -rf hun.lgf hun-undir.lgf lemon-1.2.tar.gz  win-lib lemon-linux lemon-cygwin
 
 linux-lib: lemon-linux
 	rm -rf lemon
@@ -54,7 +54,12 @@ digraph: lemonpath digraph.cpp
 gyakorlo: lemonpath gyakorlo.cpp 
 	g++ -o gyakorlo gyakorlo.cpp -I `cat lemonpath` -L `cat lemonpath` -lemon
 
-uthalozat: lemonpath uthalozat.cpp
-	g++ -o uthalozat uthalozat.cpp  -I `cat lemonpath` -L `cat lemonpath` -lemon
+uthalozat: uthalozat-undir
+	cp -fl uthalozat-undir uthalozat
 
+uthalozat-undir: lemonpath uthalozat-undir.cpp
+	g++ -o uthalozat-undir uthalozat-undir.cpp  -I `cat lemonpath` -L `cat lemonpath` -lemon
+
+uthalozat-di: lemonpath uthalozat-di.cpp
+	g++ -o uthalozat-di uthalozat-di.cpp  -I `cat lemonpath` -L `cat lemonpath` -lemon
 

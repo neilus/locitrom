@@ -10,24 +10,24 @@ using namespace std;
 
 int main(int argc, char*argv[])
 {
- ListDigraph g;
- ListDigraph::Node nodes;
- ListDigraph::Arc	 arcs;
- ListDigraph::NodeMap<int> label(g);
- ListDigraph::NodeMap<double> lat(g);
- ListDigraph::NodeMap<double> lon(g);
- ListDigraph::ArcMap<int> length(g);
- ListDigraph::ArcMap<int> maxspeed(g);
+ ListGraph g;
+ ListGraph::Node nodes;
+ ListGraph::Edge	 edges;
+ ListGraph::NodeMap<int> label(g);
+ ListGraph::NodeMap<double> lat(g);
+ ListGraph::NodeMap<double> lon(g);
+ ListGraph::EdgeMap<int> length(g);
+ ListGraph::EdgeMap<int> maxspeed(g);
 
- ListDigraph::NodeMap<bool> visited(g);
-// ListDigraph::NodeMap<bool> processed(g);
+ ListGraph::NodeMap<bool> visited(g);
+// ListGraph::NodeMap<bool> processed(g);
 
- string filename = ( (argc < 2)?"hun.lgf":argv[1] )  ;
+ string filename = ( (argc < 2)?"hun-undir.lgf":argv[1] )  ;
  cout << "A "<< filename <<" fájlt elkezdem feldolgozni (ez eltarthat egy jódarabig)"<< endl;
  try {
-	 DigraphReader<ListDigraph>(g, filename.c_str())
-		.arcMap("length",length)
-		.arcMap("maxspeed",maxspeed)
+	 graphReader<ListGraph>(g, filename.c_str())
+		.edgeMap("length",length)
+		.edgeMap("maxspeed",maxspeed)
 		.nodeMap("label",label)
 		.nodeMap("lat",lat)
 		.nodeMap("lon",lon)
@@ -39,26 +39,26 @@ int main(int argc, char*argv[])
  
 // cout << "\n\tthe graph has been read from the file...\n";
 // adding a 1-node island in to the graph we just read ... for fun and control
-// ListDigraph::Node island = g.addNode();
+// ListGraph::Node island = g.addNode();
  int SumNodes = countNodes(g);
 // cout << "Number of arcs: " << countArcs(g) << endl;
 // cout << "\tNumber of nodes: \t" << SumNodes << endl;
-// for (ListDigraph::NodeIt i(g); i != INVALID; ++i)
+// for (ListGraph::NodeIt i(g); i != INVALID; ++i)
 //	visited[i]=false;
  
  int reached;
  int unreached = SumNodes;
- Bfs<ListDigraph> bfs(g);
+ Bfs<ListGraph> bfs(g);
 // bfs.reachedMap(visited);
 // bfs.processedMap(processed);
  vector<int> components;
- ListDigraph::NodeIt s(g);
+ ListGraph::NodeIt s(g);
  int max = 0;
  do{
  	reached = 1;
  	bfs.run(s);
 	visited[s]=true;
-	for (ListDigraph::NodeIt i(g); unreached > 0 && i != INVALID; ++i){
+	for (ListGraph::NodeIt i(g); unreached > 0 && i != INVALID; ++i){
 		if( bfs.reached(i) && !visited[i] ) {
 			reached ++;
 			visited[i] = true;

@@ -1,11 +1,10 @@
-<!DOCTYPE html>
 <html>
 <head><title> 1. házi feladat: Alkalmazott modul: Hálózati folyamok és alkalmazásaik</title>
 </head>
 <body>
 <h1> Alkalmazott modul: hálózati folyamok és alkalmazásaik</h1>
 <h2> 1. programozási házi feladat:</h1><br />
-<table>
+<table border="0">
 <br/>
 <tr><td>A beadandót készítette:</td><td> Sana Norbert</td></tr>
 </table>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+
+    <title>Locitrom by neilus</title>
+  </head>
+
+  <body>
+
+    <header>
+      <div class="container">
+        <h1>Locitrom</h1>
+        <h2>kezdeti szopas a lemon graph library-val</h2>
+
+        <section id="downloads">
+          <a href="https://github.com/neilus/locitrom/zipball/master" class="btn">Download as .zip</a>
+          <a href="https://github.com/neilus/locitrom/tarball/master" class="btn">Download as .tar.gz</a>
+          <a href="https://github.com/neilus/locitrom" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
+        </section>
+      </div>
+    </header>
+
+    <div class="container">
+      <section id="main_content">
+        <p>lócitrom - avagy elsõ lépéseim a lemon c++ library-val való ismerkedéskor:</p>
+
+<p>Amit itt találni lehet azok, a lemon tutoriálból, illetve dokumentációból lemásolt demó kódok, néhol lehet módosítottam is, nem vezetem mivel ez tényleg csak a kis saját játszóterem...</p>
+
+<p>Mivel lustaság fél egészség írtam egy szép Makefilet: 
+a könyvtárban kiadott make parancs linux/unix/cygwin alatt (már ha van pl autotools, gcc, wget, stb ) letölti a kísérleteim során használt lemon library tar-ballt, a lemon honlapjáról, kicsomagolja és megpróbálja installálni is. 
+tehát miután letöltötted a következő a dolgod:</p>
+
+<pre><code>
+    cd locitrom
+    make
+</code></pre>
+Az installált lib, a könyvtárstruktúrában a relatív lemon könyvtár alatt lesz ezután. A Makefile-ban a target-ek fordítási szabályai, használják ezt a libraryt, így ha már van lemon a gépeden, célszerű lesz átírnod a Makefile-t.
+
+kicsit vizuálisabban, a make parancs után a locitrom könyvtár nagyjából így kell, hogy kinézzen:
+<pre>
+locitrom +--lemon + --lib
+         |        + --include
+         |        + --bin
+         |
+         +--README.md
+         +--README.txt
+         +--Makefile
+         +--install-lemon.sh
+         |
+         +--hello.cpp
+         +--hello.exe
+         |
+         +--digraph.lgf
+         +--digraph.cpp
+         +--digraph.exe
+         |
+         +--hun.lgf
+         +--uthalozat.cpp
+         +--uthalozat.exe
+</pre>
+
+<p>Ezt az egáesz mókát az ELTÉn 2012 őszi félévében indított Alkalmazott modul 1 - Hálózati folyamok ... 
+<a href="http://lemon.cs.elte.hu/trac/lemon/wiki/AlkMod2012">tárgy miatt</a>kezdtem el, ezért is a könnyítések. A programok jelenleg paraméter nélkül futnak, nem user számára készültek. A futásukhoz szükséges fájlokat általában letöltetem a Makefile-ból függőségként, így ne aggódj, hogy ilyen pici (legalább a git nem túl lassú)</p>
+
+<p>Hogyha saját kódot szeretnél írni és a Make-szkriptem által telepített lemon-t szeretnéd használni, akkor (felteszem a repó könyvtárába hozod létre a fájlt, így:) </p>
+
+<pre><code>
+    g++ -o kimeneti-binaris-neve forrásfájlod.cpp -I lemon/include/ -L lemon/lib/ -lemon
+</code></pre>
+
+<p>szóval a </p><pre><code>-I lemon/include/ -L lemon/lib/ -lemon</code></pre> rész kell a fordítónak, hogy tudja hol keresse a lemont, meg hogy egyáltalán keresse.
+
+<p>Az itteni tartalmakat a GNU/GPL licensze alatt teszem közre (ha jól emlékszem az eredeti forrás is így tett), ami azt jelenti, hogy játszhatsz kedvedre a kóddal ahogy csak akarsz, de ha publikálod vagy másnak odaadod az eredetit vagy az általad módosított változatát, meg kell nevezd az eredeti forrást és neked is GPL licensz alatt kell továbbadnod a kódot.</p>
+
+<p>Ha örülsz és meg szeretnéd hálálni, hogy ezt így kiraktam: szeretem a SÖRt.</p>
+      </section>
+    </div>
+
+    
+  </body>
+</html>

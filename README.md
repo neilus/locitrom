@@ -8,9 +8,9 @@ Egy lgf formátumban megadott irányítatlan gráfról eldönteni, hogy összef�
 
 2. Fordítás:
 ------------
-A program megírásához felhasználtam a LEMON C++ Graph Library-t, így ez egy függõsége a program fordításának is. Hogyha a rendszerre már telepítve van a lemon, akkor elég a beadandó program könyvtárában a 'make' parancsot kiadni, ez lefordítja a binárist valamint ha még nincs a könyvtárban letölti a beadandóhoz mellékelt gráfot. Abban az esetben ha a lemon nincs telepítve a rendszerre, akkor a 'make lemon && make ' parancs kiadásával elõször letölti és megpróbálja telepíteni a lemon-t a program könyvtárába, majd a programkönyvtárba telepített lemon-t fogja használni ez után a beadandó program fordításához.
+A program megírásához felhasználtam a LEMON C++ Graph Library-t, így ez egy függõsége a program fordításának is. Hogyha a rendszerre már telepítve van a lemon, akkor elég a beadandó program könyvtárában a `make` parancsot kiadni, ez lefordítja a binárist valamint ha még nincs a könyvtárban letölti a beadandóhoz mellékelt gráfot. Abban az esetben ha a lemon nincs telepítve a rendszerre, akkor a `make lemon && make ` parancs kiadásával elõször letölti és megpróbálja telepíteni a lemon-t a program könyvtárába, majd a programkönyvtárba telepített lemon-t fogja használni ez után a beadandó program fordításához.
 
 3. Használati útmutató:
 -----------------------
 A program alap esetben nem vár paramétereket, és a vele egy könyvtárban levõ hun-undir.lgf fájlt használja inputként. Lehet azonban paraméterként tetszõleges fájlt is megadni a hun.lgf helyett. 
-'./uthalozat hun.lgf'
+`./uthalozat hun.lgf`

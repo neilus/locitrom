@@ -19,8 +19,11 @@ int main(int argc, char*argv[])
  ListGraph::ArcMap<int> length(g);
  ListGraph::ArcMap<int> maxspeed(g);
 
- ListGraph::NodeMap<bool> visited(g);
+ //ListGraph::NodeMap<bool> visited(g);
+ Bfs<ListGraph>::SetReachedMap<ListGraph::NodeMap<bool> > visited(g);
 // ListGraph::NodeMap<bool> processed(g);
+
+
 
  string filename = ( (argc < 2)?"hun.lgf":argv[1] )  ;
  cout << "A "<< filename <<" fájlt elkezdem feldolgozni (ez eltarthat egy jódarabig)"<< endl;
@@ -53,6 +56,7 @@ int main(int argc, char*argv[])
 // bfs.processedMap(processed);
  vector<int> components;
  ListGraph::NodeIt s(g);
+ bsf(g).setReachedMap(visited).run(s);
  int max = 0;
  do{
  	reached = 1;

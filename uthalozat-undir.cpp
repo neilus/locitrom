@@ -24,11 +24,11 @@ int main(int argc, char*argv[])
  cout << "A "<< filename <<" fájlt elkezdem feldolgozni (ez eltarthat egy jódarabig)"<< endl;
  try {
 	 graphReader<ListGraph>(g, filename.c_str())
-		.edgeMap("length",length)
-		.edgeMap("maxspeed",maxspeed)
-		.nodeMap("label",label)
-		.nodeMap("lat",lat)
-		.nodeMap("lon",lon)
+		// .edgeMap("length",length)
+		// .edgeMap("maxspeed",maxspeed)
+		// .nodeMap("label",label)
+		// .nodeMap("lat",lat)
+		// .nodeMap("lon",lon)
 		.run();
 	 } catch (Exception& error) { // check if there was any error
     cout << "Error: " << error.what() << endl;

@@ -1,4 +1,4 @@
-all:  hello_lemon  uthalozat-undir uthalozat-di hun.lgf hun-undir.lgf
+all:  hello_lemon uthalozat-undir uthalozat-di hun.lgf hun-undir.lgf
 	
 clean:
 	rm -rf lemon-1.2 hun.lgf.zip hun-undir.lgf.zip hello gyakorlo uthalozat digraph uthalozat-di uthalozat-undir hello_lemon
@@ -49,7 +49,7 @@ lemonpath:
 
 hello_lemon: lemonpath hello_lemon.cc
 	g++ -o hello_lemon hello_lemon.cc  -I `cat lemonpath`"/include" -L `cat lemonpath`"/lib" -lemon
-	@ if[ $? != 0 ];then tput setf 4; echo "valami bibi, van, szerintem nincs lemonod, ha a hello lemon se fordul, megprobalom bekonfiguralni neked..."; tput sgr0; sleep 3; make lemonpath; if [ $? == 0 ]; then tput 2; echo "sikerult felraknom a lemont, probald ujra...";tput sgr0; fi ; fi
+	-@ if[ $? != 0 ];then tput setf 4; echo "valami bibi, van, szerintem nincs lemonod, ha a hello lemon se fordul, megprobalom bekonfiguralni neked..."; tput sgr0; sleep 3; make lemonpath; if [ $? == 0 ]; then tput 2; echo "sikerult felraknom a lemont, probald ujra...";tput sgr0; fi ; fi
 	@# ugysem futtatja a make...
 digraph: lemonpath digraph.cpp 
 	g++ -o digraph digraph.cpp  -I `cat lemonpath`"/include" -L `cat lemonpath`"/lib" -lemon
@@ -68,9 +68,9 @@ uthalozat-undir: lemonpath uthalozat-undir.cpp
 uthalozat-di: lemonpath uthalozat-di.cpp
 	g++ -o uthalozat-di uthalozat-di.cpp  -I `cat lemonpath`"/include" -L `cat lemonpath`"/lib" -lemon
 uthalozat-di.cpp: uthalozat-undir.cpp
-	@tput setf 6
+	-@tput setf 6
 	@echo "Ugy latom frissult az uthalozat iranyitatlan verzioja!, begrissitem rola az iranyitottat!"
-	@tput sgr0
+	-@tput sgr0
 	sed 's/ListGraph/ListDigraph/' uthalozat-undir.cpp > $@
 	sed -i 's/Edge/Arc/' $@
 	sed -i 's/edges/arcs/' $@

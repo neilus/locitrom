@@ -1,4 +1,4 @@
-all:  hello_lemon  uthalozat-undir uthalozat-di hun.lgf hun-undir.lgf
+all:  hello_lemon  gyakorlo
 	
 clean:
 	rm -rf lemon-1.2 hun.lgf.zip hun-undir.lgf.zip hello gyakorlo uthalozat digraph uthalozat-di uthalozat-undir hello_lemon
@@ -49,8 +49,6 @@ lemonpath:
 
 hello_lemon: lemonpath hello_lemon.cc
 	g++ -o hello_lemon hello_lemon.cc  -I `cat lemonpath`"/include" -L `cat lemonpath`"/lib" -lemon
-	## @ if[ $? != 0 ];then tput setf 4; echo "valami bibi, van, szerintem nincs lemonod, ha a hello lemon se fordul, megprobalom bekonfiguralni neked..."; tput sgr0; sleep 3; make lemonpath; if [ $? == 0 ]; then tput 2; echo "sikerult felraknom a lemont, probald ujra...";tput sgr0; fi ; fi
-	# ugysem futtatja a make...
 digraph: lemonpath digraph.cpp 
 	g++ -o digraph digraph.cpp  -I `cat lemonpath`"/include" -L `cat lemonpath`"/lib" -lemon
 

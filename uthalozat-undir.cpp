@@ -20,7 +20,7 @@ int main(int argc, char*argv[])
  ListGraph::EdgeMap<int> maxspeed(g);
 
  ListGraph::NodeMap<bool> visited(g);
-// ListGraph::NodeMap<bool> processed(g);
+
 
  string filename = ( (argc < 2)?"hun-undir.lgf":argv[1] )  ;
  cout << "A "<< filename <<" fájlt elkezdem feldolgozni (ez eltarthat egy jódarabig)"<< endl;
@@ -39,35 +39,31 @@ int main(int argc, char*argv[])
  
 
  int SumNodes = countNodes(g);
+ cout << "\nA gráfban található csúcsok száma: \t\t\t" << SumNodes << endl;
+ 
+ vector<int> components;
+ int max=0;
+ Bfs<ListGraph> bfs(g);
+ bfs.reachedMap(visited);
+
+ bfs.init();
+ for(ListGraph::NodeIt i(g);i!=INVALID;++i){
+ 	
+ 	if(!bfs.reached(i)){
+ 		bfs.addSource(i); 		
+ 		int reached=0; // a komponens merete
+ 		// bfs.start();
+ 		while(!bfs.emptyQueue() ){
+ 			bfs.processNextNode();
+ 			reached++;
+ 		}
+ 		components.push_back(reached);
+ 		max = (components[max] < components[components.size()-1])? components.size()-1 : max;
+ 	}
+ }
 
  
- int reached;
- int unreached = SumNodes;
- Bfs<ListGraph> bfs(g);
-
- vector<int> components;
- ListGraph::NodeIt s(g);
- int max = 0;
- do{
- 	reached = 1;
- 	bfs.run(s);
-	visited[s]=true;
-	for (ListGraph::NodeIt i(g); unreached > 0 && i != INVALID; ++i){
-		if( bfs.reached(i) && !visited[i] ) {
-			reached ++;
-			visited[i] = true;
-		}else 
-		if(!bfs.reached(i) && !visited[i] )
-			s = i;
-			
-	 }
-	unreached -= reached;
-	components.push_back(reached);
-	max = ( max < reached)? reached:max;
-//	cout << "\n\t" << reached << " nodes reached,\t"<< unreached <<" nodes to go\t";
- } while( !visited[s] );
- SumNodes = countNodes(g);
- cout << "\nA gráfban található csúcsok száma: \t\t\t" << SumNodes << endl;
- cout << endl << components.size() << " komponenst találtam a gráfban, melyek közül a legnagyonbb " << max << " csúcsot tartalmaz\n";
+ 
+ cout << endl << components.size() << " komponenst találtam a gráfban, melyek közül a legnagyonbb " << components[max] << " csúcsot tartalmaz\n";
  return 0;
 }

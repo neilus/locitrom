@@ -13,47 +13,57 @@ int main(int argc, char*argv[])
  ListGraph g;
  ListGraph::Node nodes;
  ListGraph::Edge	 edges;
-// ListGraph::NodeMap<bool> visited(g);
+ ListGraph::NodeMap<int> label(g);
+ ListGraph::NodeMap<double> lat(g);
+ ListGraph::NodeMap<double> lon(g);
+ ListGraph::EdgeMap<int> length(g);
+ ListGraph::EdgeMap<int> maxspeed(g);
 
-// Bfs<ListGraph>::SetReachedMap<ListGraph::NodeMap<bool> > visited(g);
-// Bfs<ListGraph>::SetReachedMap<ListGraph::NodeMap<bool> > lastvisited(g);
+ ListGraph::NodeMap<bool> visited(g);
 
- string filename = ( (argc < 2)?"hun.lgf":argv[1] )  ;
- cerr << "A "<< filename <<" fájlt elkezdem feldolgozni (ez eltarthat egy jódarabig)"<< endl;
+
+ string filename = ( (argc < 2)?"hun-undir.lgf":argv[1] )  ;
+ cout << "A "<< filename <<" fájlt elkezdem feldolgozni (ez eltarthat egy jódarabig)"<< endl;
  try {
 	 graphReader<ListGraph>(g, filename.c_str())
+		.edgeMap("length",length)
+		.edgeMap("maxspeed",maxspeed)
+		.nodeMap("label",label)
+		.nodeMap("lat",lat)
+		.nodeMap("lon",lon)
 		.run();
 	 } catch (Exception& error) { // check if there was any error
     cout << "Error: " << error.what() << endl;
     return -1;
   	}
  
+
  int SumNodes = countNodes(g);
+ cout << "\nA gráfban található csúcsok száma: \t\t\t" << SumNodes << endl;
  
- int reached;
- int unreached = SumNodes;
- Bfs<ListGraph> bfs(g);
  vector<int> components;
-// bfs(g).setReachedMap(visited);
- int max = 0;
- while( unreached > 0 ){
- 	ListGraph::NodeIt s(g),i(g);
- 	bfs.init();
-	bfs.addSource(s);
- 	reached = 1;
- 	while( !bfs.emptyQueue() ){
-		i = ListGraph::NodeIt( g, bfs.processNextNode() );
-		g.erase(s);
-		s = i;
-		reached ++;
-	}
-	g.erase(s);
-	unreached -= reached;
-	components.push_back(reached);
-	max = ( max < reached)? reached:max;
-	cout << "\n\t" << reached << " nodes reached,\t"<< unreached <<" nodes to go\t";
+ int c=0,max=0;
+ Bfs<ListGraph> bfs(g);
+ bfs.reachedMap(visited);
+
+ bfs.init();
+ for(ListGraph::NodeIt i(g);i!=INVALID;++i){
+ 	
+ 	if(!bfs.reached(i)){
+ 		bfs.addSource(i); 		
+ 		c=0; // a komponens merete
+ 		// bfs.start();
+ 		while(!bfs.emptyQueue() ){
+ 			bfs.processNextNode();
+ 			reached++;
+ 		}
+ 		components.push_back(reached);
+ 		max = (max < reached)? reached : max;
+ 	}
  }
- cout << "\n\nA gráfban található csúcsok száma: " << SumNodes << endl;
- cout << components.size() << " komponenst találtam a gráfban, melyek közül a legnagyonbb " << max << " csúcsot tartalmaz\n";
+
+ 
+ 
+ cout << endl << components << " komponenst találtam a gráfban, melyek közül a legnagyonbb " << max << " csúcsot tartalmaz\n";
  return 0;
 }

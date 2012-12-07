@@ -1,4 +1,4 @@
-all: uthalozat uthalozat-undir uthalozat-di hun.lgf hun-undir.lgf
+all:  uthalozat-undir gyakorlo uthalozat-di hun.lgf hun-undir.lgf
 	
 clean:
 	rm -rf lemon-1.2 hun.lgf.zip hun-undir.lgf.zip hello gyakorlo uthalozat digraph uthalozat-di uthalozat-undir
@@ -41,28 +41,29 @@ lemon: lemon-1.2
 	rm -rf lemon
 	./install-lemon.sh "-`(uname -a|grep -i linux >/dev/null && echo linux) || (uname -a|grep -i cygwin >/dev/null && echo cygwin)`"
 	rm -rf lemon-1.2
+	
 
 lemonpath:
 	make lemon
+	echo "lemon">lemonpath
 
 hello: lemonpath hello.cpp 
-	g++ -o hello hello.cpp  -I `cat lemonpath` -L `cat lemonpath` -lemon
+	g++ -o hello hello.cpp  -I `cat lemonpath`"/include" -L `cat lemonpath`"/lib" -lemon
 
 digraph: lemonpath digraph.cpp 
-	g++ -o digraph digraph.cpp  -I `cat lemonpath` -L `cat lemonpath` -lemon
+	g++ -o digraph digraph.cpp  -I `cat lemonpath`"/include" -L `cat lemonpath`"/lib" -lemon
 
 gyakorlo: lemonpath gyakorlo.cpp 
-	g++ -o gyakorlo gyakorlo.cpp -I `cat lemonpath` -L `cat lemonpath` -lemon
-
+	g++ -o gyakorlo gyakorlo.cpp -I `cat lemonpath`"/include" -L `cat lemonpath`"/lib" -lemon
 gyakorlo-dir: lemonpath gyakorlo-dir.cpp 
-	g++ -o gyakorlo-dir gyakorlo-dir.cpp -I `cat lemonpath` -L `cat lemonpath` -lemon
+	g++ -o gyakorlo-dir gyakorlo-dir.cpp -I  `cat lemonpath`"/include" -L `cat lemonpath`"/lib" -lemon
 
 uthalozat: uthalozat-undir
-	cp -fl uthalozat-undir uthalozat
+	g++ -o uthalozat uthalozat.cpp  -I `cat lemonpath`"/include" -L `cat lemonpath`"/lib" -lemon
 
 uthalozat-undir: lemonpath uthalozat-undir.cpp
-	g++ -o uthalozat-undir uthalozat-undir.cpp  -I `cat lemonpath` -L `cat lemonpath` -lemon
+	g++ -o uthalozat-undir uthalozat-undir.cpp  -I `cat lemonpath`"/include" -L `cat lemonpath`"/lib" -lemon
 
 uthalozat-di: lemonpath uthalozat-di.cpp
-	g++ -o uthalozat-di uthalozat-di.cpp  -I `cat lemonpath` -L `cat lemonpath` -lemon
+	g++ -o uthalozat-di uthalozat-di.cpp  -I `cat lemonpath`"/include" -L `cat lemonpath`"/lib" -lemon
 

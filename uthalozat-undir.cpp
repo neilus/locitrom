@@ -37,20 +37,14 @@ int main(int argc, char*argv[])
     return -1;
   	}
  
-// cout << "\n\tthe graph has been read from the file...\n";
-// adding a 1-node island in to the graph we just read ... for fun and control
-// ListGraph::Node island = g.addNode();
+
  int SumNodes = countNodes(g);
-// cout << "Number of arcs: " << countArcs(g) << endl;
-// cout << "\tNumber of nodes: \t" << SumNodes << endl;
-// for (ListGraph::NodeIt i(g); i != INVALID; ++i)
-//	visited[i]=false;
+
  
  int reached;
  int unreached = SumNodes;
  Bfs<ListGraph> bfs(g);
-// bfs.reachedMap(visited);
-// bfs.processedMap(processed);
+
  vector<int> components;
  ListGraph::NodeIt s(g);
  int max = 0;

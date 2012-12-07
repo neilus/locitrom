@@ -56,10 +56,11 @@ int main(int argc, char*argv[])
 // bfs.processedMap(processed);
  vector<int> components;
  ListGraph::NodeIt s(g);
- bsf(g).setReachedMap(visited).run(s);
+ bfs(g).setReachedMap(visited).run(s);
  int max = 0;
  do{
  	reached = 1;
+
  	bfs.run(s);
 	visited[s]=true;
 	for (ListGraph::NodeIt i(g); unreached > 0 && i != INVALID; ++i){

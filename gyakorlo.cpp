@@ -42,7 +42,7 @@ int main(int argc, char*argv[])
  cout << "\nA gráfban található csúcsok száma: \t\t\t" << SumNodes << endl;
  
  vector<int> components;
- int c=0,max=0;
+ int max=0;
  Bfs<ListGraph> bfs(g);
  bfs.reachedMap(visited);
 
@@ -51,19 +51,19 @@ int main(int argc, char*argv[])
  	
  	if(!bfs.reached(i)){
  		bfs.addSource(i); 		
- 		c=0; // a komponens merete
+ 		int reached=0; // a komponens merete
  		// bfs.start();
  		while(!bfs.emptyQueue() ){
  			bfs.processNextNode();
  			reached++;
  		}
  		components.push_back(reached);
- 		max = (max < reached)? reached : max;
+ 		max = (components[max] < components[components.size()-1])? components.size()-1 : max;
  	}
  }
 
  
  
- cout << endl << components << " komponenst találtam a gráfban, melyek közül a legnagyonbb " << max << " csúcsot tartalmaz\n";
+ cout << endl << components.size() << " komponenst találtam a gráfban, melyek közül a legnagyonbb " << components[max] << " csúcsot tartalmaz\n";
  return 0;
 }

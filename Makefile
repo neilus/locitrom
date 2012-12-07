@@ -1,4 +1,4 @@
-all:  hello_lemon gyakorlo uthalozat-undir uthalozat-di hun.lgf hun-undir.lgf
+all:  hello_lemon  uthalozat-undir uthalozat-di hun.lgf hun-undir.lgf
 	
 clean:
 	rm -rf lemon-1.2 hun.lgf.zip hun-undir.lgf.zip hello gyakorlo uthalozat digraph uthalozat-di uthalozat-undir hello_lemon
@@ -67,4 +67,14 @@ uthalozat-undir: lemonpath uthalozat-undir.cpp
 
 uthalozat-di: lemonpath uthalozat-di.cpp
 	g++ -o uthalozat-di uthalozat-di.cpp  -I `cat lemonpath`"/include" -L `cat lemonpath`"/lib" -lemon
-
+uthalozat-di.cpp: uthalozat-undir.cpp
+	@tput setf 6
+	@echo "Ugy latom frissult az uthalozat iranyitatlan verzioja!, begrissitem rola az iranyitottat!"
+	@tput sgr0
+	sed 's/ListGraph/ListDigraph/' uthalozat-undir.cpp > $@
+	sed -i 's/Edge/Arc/' $@
+	sed -i 's/edges/arcs/' $@
+	sed -i 's/EdgeMap/ArcMap/' $@
+	sed -i 's/edgeMap/arcMap/' $@
+	sed -i 's/graphReader/DigraphReader/' $@
+	sed -i 's/hun-undir.lgf/hun.lgf/' $@

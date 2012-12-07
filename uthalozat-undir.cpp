@@ -12,15 +12,13 @@ int main(int argc, char*argv[])
 {
  ListGraph g;
  ListGraph::Node nodes;
- ListGraph::Edge	 edges;
+ ListGraph::Edge edges;
  ListGraph::NodeMap<int> label(g);
  ListGraph::NodeMap<double> lat(g);
  ListGraph::NodeMap<double> lon(g);
  ListGraph::EdgeMap<int> length(g);
  ListGraph::EdgeMap<int> maxspeed(g);
-
  ListGraph::NodeMap<bool> visited(g);
-
 
  string filename = ( (argc < 2)?"hun-undir.lgf":argv[1] )  ;
  cout << "A "<< filename <<" fájlt elkezdem feldolgozni (ez eltarthat egy jódarabig)"<< endl;
@@ -36,7 +34,6 @@ int main(int argc, char*argv[])
     cout << "Error: " << error.what() << endl;
     return -1;
   	}
- 
 
  int SumNodes = countNodes(g);
  cout << "\nA gráfban található csúcsok száma: \t\t\t" << SumNodes << endl;
@@ -61,9 +58,7 @@ int main(int argc, char*argv[])
  		max = (components[max] < components[components.size()-1])? components.size()-1 : max;
  	}
  }
-
- 
- 
+  
  cout << endl << components.size() << " komponenst találtam a gráfban, melyek közül a legnagyonbb " << components[max] << " csúcsot tartalmaz\n";
  return 0;
 }

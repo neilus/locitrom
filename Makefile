@@ -1,7 +1,7 @@
 all:  hello_lemon  gyakorlo
 	
 clean:
-	rm -rf lemon-1.2 hun.lgf.zip hun-undir.lgf.zip hello gyakorlo uthalozat digraph uthalozat-di uthalozat-undir hello_lemon
+	rm -rf lemon-1.2 hun.lgf.zip hun-undir.lgf.zip hello gyakorlo uthalozat digraph uthalozat-di uthalozat-undir hello_lemon uthalozat-di.cpp
 
 dist-clean: clean
 	rm -rf lemon 

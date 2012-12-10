@@ -36,7 +36,7 @@ int main(int argc, char*argv[])
   	}
 
  int SumNodes = countNodes(g);
- cout << "\nA gráfban található csúcsok száma: \t\t\t" << SumNodes << endl;
+ cout << "\nA gráfban taállható csúcsok száma: \t\t\t" << SumNodes << endl;
  
  vector<int> components;
  int max=0;

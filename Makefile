@@ -68,10 +68,10 @@ gyakorlo: lemonpath gyakorlo.cpp
 gyakorlo-dir: lemonpath gyakorlo-dir.cpp 
 	g++ -o gyakorlo-dir gyakorlo-dir.cpp -I  `cat lemonpath`"/include" -L `cat lemonpath`"/lib" -lemon
 
-szintezo: lemonpath szintezo.cpp 
-	g++ -o szintezo szintezo.cpp -I `cat lemonpath`"/include" -L `cat lemonpath`"/lib" -lemon
-eljavito: lemonpath eljavito.cpp 
-	g++ -o eljavito eljavito.cpp -I `cat lemonpath`"/include" -L `cat lemonpath`"/lib" -lemon
+szintezo: lemonpath szintezo.cpp szintezo.h
+	g++ -o szintezo szintezo.cpp szintezo.h -I `cat lemonpath`"/include" -L `cat lemonpath`"/lib" -lemon
+eljavito: lemonpath eljavito.cpp eljavito.h
+	g++ -o eljavito eljavito.cpp eljavito.h -I `cat lemonpath`"/include" -L `cat lemonpath`"/lib" -lemon
 
 uthalozat-undir: lemonpath uthalozat-undir.cpp hun-undir.lgf
 	g++ -o uthalozat-undir uthalozat-undir.cpp  -I `cat lemonpath`"/include" -L `cat lemonpath`"/lib" -lemon

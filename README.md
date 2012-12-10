@@ -14,8 +14,12 @@ A program megírásához felhasználtam a LEMON C++ Graph Library-t, így ez egy
 -----------------------
 A program alap esetben nem vár paramétereket, és a vele egy könyvtárban levõ hun-undir.lgf fájlt használja inputként. Lehet azonban paraméterként tetszõleges fájlt is megadni a hun.lgf helyett. 
 Alap esetben az alábbi parameterezéssel ekvivalensen futnak paraméterek nélkül is a programok:
+
 `./uthalozat-undir hun-undir.lgf`
+
 `./uthalozat-dir hun.lgf`
+
 `./szintezo teszt-szintezo.lgf`
+
 `./eljavito teszt-eljavito.lgf`
 

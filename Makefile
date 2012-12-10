@@ -73,13 +73,10 @@ szintezo: lemonpath szintezo.cpp
 eljavito: lemonpath eljavito.cpp 
 	g++ -o eljavito eljavito.cpp -I `cat lemonpath`"/include" -L `cat lemonpath`"/lib" -lemon
 
-uthalozat: uthalozat-undir
-	g++ -o uthalozat uthalozat.cpp  -I `cat lemonpath`"/include" -L `cat lemonpath`"/lib" -lemon
-
-uthalozat-undir: lemonpath uthalozat-undir.cpp
+uthalozat-undir: lemonpath uthalozat-undir.cpp hun-undir.lgf
 	g++ -o uthalozat-undir uthalozat-undir.cpp  -I `cat lemonpath`"/include" -L `cat lemonpath`"/lib" -lemon
 
-uthalozat-di: lemonpath uthalozat-di.cpp
+uthalozat-di: lemonpath uthalozat-di.cpp hun.lgf
 	g++ -o uthalozat-di uthalozat-di.cpp  -I `cat lemonpath`"/include" -L `cat lemonpath`"/lib" -lemon
 uthalozat-di.cpp: uthalozat-undir.cpp
 	-@tput setf 6

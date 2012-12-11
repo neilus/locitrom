@@ -13,6 +13,9 @@
 #include "eljavito.h"
 #include "mindenfele.h"
 
+using namespace std;
+using namespace lemon;
+
 int main(int argc, char*argv[])
 {
  ListDigraph g;

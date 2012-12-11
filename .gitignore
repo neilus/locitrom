@@ -4,6 +4,7 @@ lemon/*
 lemon-1.2
 lemon-1.2/*
 hun.lgf
+*stackdump
 *.zip
 *.gz
 *.bz

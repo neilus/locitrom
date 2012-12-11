@@ -5,10 +5,11 @@ clean:
 	rm -rf lemon-1.2 hun.lgf.zip hun-undir.lgf.zip hello gyakorlo uthalozat digraph uthalozat-di uthalozat-undir hello_lemon uthalozat-di.cpp szintezo eljavito *.log
 
 dist-clean: clean
-	rm -rf lemon 
+	rm -rf lemon lemonpath
+	echo " -lemon">lemonpath
 
 deep-clean: dist-clean
-	rm -rf hun.lgf hun-undir.lgf lemon-1.2.tar.gz  win-lib lemon-linux lemon-cygwin lemonpath
+	rm -rf hun.lgf hun-undir.lgf lemon* 
 
 linux-lib: lemon-linux
 	rm -rf lemon
@@ -49,8 +50,12 @@ lemon: lemon-1.2
 	@echo "Most installalok lokalisan egy lemon-t"
 	-@tput sgr0
 	rm -rf lemon
-	./install-lemon.sh "-`(uname -a|grep -i linux >/dev/null && echo linux) || (uname -a|grep -i cygwin >/dev/null && echo cygwin)`"
-	## rm -rf lemon-1.2
+	@echo -n "ide rakom a lemon backupjat"
+	-@tput setf 
+	@echo `(uname -a|grep -i linux >/dev/null && echo linux) || (uname -a|grep -i cygwin >/dev/null && echo cygwin)|| (uname -a|grep -i MINGW32 >/dev/null && echo windows-mingw) `
+	-@tput sgr0
+	./install-lemon.sh "-`(uname -a|grep -i linux >/dev/null && echo linux) || (uname -a|grep -i cygwin >/dev/null && echo cygwin)|| (uname -a|grep -i MINGW32 >/dev/null && echo windows-mingw) `"
+	rm -rf lemon-1.2
 lemonpath:
 	make lemon
 	-@tput setf 6

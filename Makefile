@@ -1,7 +1,8 @@
-all:  hello_lemon  gyakorlo szintezo eljavito uthalozat-di uthalozat-undir
-	
+all:   eljavito szintezo
+	./eljavito	2>eljavito.log
+	./szintezo  2>sizntezo.log
 clean:
-	rm -rf lemon-1.2 hun.lgf.zip hun-undir.lgf.zip hello gyakorlo uthalozat digraph uthalozat-di uthalozat-undir hello_lemon uthalozat-di.cpp szintezo eljavito
+	rm -rf lemon-1.2 hun.lgf.zip hun-undir.lgf.zip hello gyakorlo uthalozat digraph uthalozat-di uthalozat-undir hello_lemon uthalozat-di.cpp szintezo eljavito *.log
 
 dist-clean: clean
 	rm -rf lemon 
@@ -49,35 +50,33 @@ lemon: lemon-1.2
 	-@tput sgr0
 	rm -rf lemon
 	./install-lemon.sh "-`(uname -a|grep -i linux >/dev/null && echo linux) || (uname -a|grep -i cygwin >/dev/null && echo cygwin)`"
-	rm -rf lemon-1.2
-	
+	## rm -rf lemon-1.2
 lemonpath:
 	make lemon
 	-@tput setf 6
 	@echo "bellitom a lemon helyet a lokalis lemn alkonyvtarra"
 	-@tput sgr0
-	echo "lemon">lemonpath
-
+	-@tput setf 2
+	@echo '-I lemon/include -L lemon/lib -lemon'|tee lemonpath
+	-@tput sgr0
 hello_lemon: lemonpath hello_lemon.cc
-	g++ -o hello_lemon hello_lemon.cc  -I `cat lemonpath`"/include" -L `cat lemonpath`"/lib" -lemon
+	g++ -o hello_lemon hello_lemon.cc  `cat lemonpath`
 digraph: lemonpath digraph.cpp 
-	g++ -o digraph digraph.cpp  -I `cat lemonpath`"/include" -L `cat lemonpath`"/lib" -lemon
-
+	g++ -o digraph digraph.cpp  
 gyakorlo: lemonpath gyakorlo.cpp 
-	g++ -o gyakorlo gyakorlo.cpp -I `cat lemonpath`"/include" -L `cat lemonpath`"/lib" -lemon
+	g++ -o gyakorlo gyakorlo.cpp `cat lemonpath`
 gyakorlo-dir: lemonpath gyakorlo-dir.cpp 
-	g++ -o gyakorlo-dir gyakorlo-dir.cpp -I  `cat lemonpath`"/include" -L `cat lemonpath`"/lib" -lemon
-
-szintezo: lemonpath szintezo.cpp szintezo.h
-	g++ -o szintezo szintezo.cpp szintezo.h -I `cat lemonpath`"/include" -L `cat lemonpath`"/lib" -lemon
-eljavito: lemonpath eljavito.cpp eljavito.h
-	g++ -o eljavito eljavito.cpp eljavito.h -I `cat lemonpath`"/include" -L `cat lemonpath`"/lib" -lemon
-
+	g++ -o gyakorlo-dir gyakorlo-dir.cpp `cat lemonpath`
+mindenfele.o: mindenfele.h
+	g++ -c mindenfele.h `cat lemonpath`
+szintezo: lemonpath szintezo.cpp szintezo.h mindenfele.h
+	g++ -o szintezo szintezo.cpp `cat lemonpath`
+eljavito: lemonpath eljavito.cpp eljavito.h mindenfele.h
+	g++ -o eljavito eljavito.cpp `cat lemonpath`
 uthalozat-undir: lemonpath uthalozat-undir.cpp hun-undir.lgf
-	g++ -o uthalozat-undir uthalozat-undir.cpp  -I `cat lemonpath`"/include" -L `cat lemonpath`"/lib" -lemon
-
+	g++ -o uthalozat-undir uthalozat-undir.cpp  `cat lemonpath`
 uthalozat-di: lemonpath uthalozat-di.cpp hun.lgf
-	g++ -o uthalozat-di uthalozat-di.cpp  -I `cat lemonpath`"/include" -L `cat lemonpath`"/lib" -lemon
+	g++ -o uthalozat-di uthalozat-di.cpp  `cat lemonpath`
 uthalozat-di.cpp: uthalozat-undir.cpp
 	-@tput setf 6
 	@echo "Ugy latom frissult az uthalozat iranyitatlan verzioja!, begrissitem rola az iranyitottat!"

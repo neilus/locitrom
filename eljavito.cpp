@@ -11,10 +11,7 @@
 #include <stdlib.h>
 #include <vector>
 #include "eljavito.h"
-
-using namespace lemon;
-using namespace std;
-
+#include "mindenfele.h"
 
 int main(int argc, char*argv[])
 {
@@ -40,8 +37,8 @@ int main(int argc, char*argv[])
  int SumNodes = countNodes(g);
  cout << "\nA gráfban található csúcsok száma: \t\t\t" << SumNodes << endl;
  
-
+ grafbejaro(g,d,label);
  eljavito(g,d,label);
- 
+ grafbejaro(g,d,label);
  return 0;
 }

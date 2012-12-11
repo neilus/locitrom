@@ -9,6 +9,7 @@
 #include <lemon/edge_set.h>
 #include <stdlib.h>
 #include "szintezo.h"
+#include "mindenfele.h"
 
 using namespace lemon;
 using namespace std;
@@ -39,8 +40,8 @@ int main(int argc, char*argv[])
 
  int SumNodes = countNodes(g);
  cout << "\nA gráfban található csúcsok száma: \t\t\t" << SumNodes << endl;
- 
+ grafbejaro(g,d,label);
  szintezo(g,d,label);
- 
+ grafbejaro(g,d,label);
  return 0;
 }

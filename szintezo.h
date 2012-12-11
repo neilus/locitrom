@@ -12,6 +12,7 @@
 #include <lemon/edge_set.h>
 #include <stdlib.h>
 
+
 using namespace lemon;
 using namespace std;
 
@@ -36,7 +37,7 @@ void szintezo(ListDigraph &G, const ListDigraph::NodeMap<int> &d , const ListDig
 		hungry = INVALID;
 
 	ListArcSet<ListDigraph> arcs(G);
-	cout << "\tN is:" << N <<endl;
+	cerr << "\tN is:" << N <<endl;
 	
 	
 	while( maxL < N && hungry != INVALID ){
@@ -63,7 +64,7 @@ void szintezo(ListDigraph &G, const ListDigraph::NodeMap<int> &d , const ListDig
 			cerr <<"DEBUG:\t" << label[i] <<"\t\t"<< ro[i]<<"\t" <<d[i] << "\t"<< l[i]<<endl;					
 		}
 	}
-	/*
+	
 	if(maxL >= N ){
 		cerr<<endl<< "nincs megoldas :( \na serto csucshalmaz:\n";
 		ListDigraph::NodeIt i(G);
@@ -80,7 +81,7 @@ void szintezo(ListDigraph &G, const ListDigraph::NodeMap<int> &d , const ListDig
 		 	}		 
 		 cerr << endl;
 	}
-	/**/
+	
 }
 
 #endif

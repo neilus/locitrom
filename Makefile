@@ -1,6 +1,7 @@
-all:   eljavito szintezo
+all:   eljavito szintezo 
 	./eljavito	2>eljavito.log
-	./szintezo  2>sizntezo.log
+	./szintezo  2>szintezo.log
+	-@echo
 clean:
 	rm -rf lemon-1.2 hun.lgf.zip hun-undir.lgf.zip hello gyakorlo uthalozat digraph uthalozat-di uthalozat-undir hello_lemon uthalozat-di.cpp szintezo eljavito *.log
 
@@ -56,8 +57,8 @@ lemon: lemon-1.2
 	-@tput sgr0
 	./install-lemon.sh "-`(uname -a|grep -i linux >/dev/null && echo linux) || (uname -a|grep -i cygwin >/dev/null && echo cygwin)|| (uname -a|grep -i MINGW32 >/dev/null && echo windows-mingw) `"
 	rm -rf lemon-1.2
+	make lemonpath;
 lemonpath:
-	make lemon
 	-@tput setf 6
 	@echo "bellitom a lemon helyet a lokalis lemn alkonyvtarra"
 	-@tput sgr0

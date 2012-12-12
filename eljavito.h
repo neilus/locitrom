@@ -32,20 +32,20 @@ void eljavito(ListDigraph &G, const ListDigraph::NodeMap<int> &d, const ListDigr
 		else if( ro[i] == d[i] )
 			eq.push_back( G.id(i) );
 	}
-	cout << endl;
+	cerr << endl;
 	// itt mar nem Digraph::NodeIt az i hanem sima integer, amivel a vektorokon iteralunk
-	cout << "A deficitesek: ";
+	cerr << "A deficitesek: ";
 	for(int i=0; i < lt.size(); i++)
-		cout << label[ G.nodeFromId( lt[i] ) ] << "\t";
-	cout << endl;
-	cout << "A jok: ";
+		cerr << label[ G.nodeFromId( lt[i] ) ] << "\t";
+	cerr << endl;
+	cerr << "A jok: ";
 	for (int i=0; i < eq.size(); i++)
-		cout << label[ G.nodeFromId( eq[i] ) ] << "\t";
-	cout << endl;
-	cout << "A tobbletesek: ";
+		cerr << label[ G.nodeFromId( eq[i] ) ] << "\t";
+	cerr << endl;
+	cerr << "A tobbletesek: ";
 	for (int i=0; i < gt.size(); i++)
-		cout << label[ G.nodeFromId( gt[i] ) ] << "\t";
-	cout << endl;
+		cerr << label[ G.nodeFromId( gt[i] ) ] << "\t";
+	cerr << endl;
 	/// miutan megvan a 3 csucsosztalyunk meg kell vizsgalni a szukseges felteteleket...
 	bool solveable = lt.size() <= gt.size();
 	while( solveable && lt.size()>0 ){
@@ -68,7 +68,7 @@ void eljavito(ListDigraph &G, const ListDigraph::NodeMap<int> &d, const ListDigr
 			/// 	annak az utnak az iranyitasat meg kell forditani amit igy talaltam
 			
 			for(Path<ListDigraph>::ArcIt arc(p);arc!=INVALID; ++arc){
-				cout << "\n megforditom az elt " << label[ G.source(arc) ]<< " es " << label[ G.target(arc) ]<< " kozott\n";
+				cerr << "\n megforditom az elt " << label[ G.source(arc) ]<< " es " << label[ G.target(arc) ]<< " kozott\n";
 				G.reverseArc(arc);
 			}/**/
 			///		update-elni kell a csucsok hova-tartozasat (melyik osztaly)
@@ -96,11 +96,11 @@ void eljavito(ListDigraph &G, const ListDigraph::NodeMap<int> &d, const ListDigr
 	}	/// amig ki nem urul a < osztaly, vagy nem talalunk egyaltalan utat a <-bol >-be
 	
 	if(!solveable){
-		cout<<endl<< "nincs megoldas :( \na serto csucshalmaz:\n";
+		cerr<<endl<< "nincs megoldas :( \na serto csucshalmaz:\n";
 		for(int i=0; i<lt.size();i++){
-			cout << label[ G.nodeFromId( lt[i] ) ] << "\t";
+			cerr << label[ G.nodeFromId( lt[i] ) ] << "\t";
 		}
-		cout << endl;
+		cerr << endl;
 	}
 
 }

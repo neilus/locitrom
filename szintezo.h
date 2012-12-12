@@ -11,14 +11,14 @@
 #include <lemon/bfs.h>
 #include <lemon/edge_set.h>
 #include <stdlib.h>
-
+#include <string>
 
 using namespace lemon;
 using namespace std;
 
 int maxL = 0;
 
-inline bool resSzint(ListDigraph &G, ListDigraph::NodeMap<int> &l, ListDigraph::NodeMap<int> &ro,const ListDigraph::NodeMap<int> &d,const ListDigraph::NodeMap<int> &label, ListDigraph::NodeIt &i){
+inline bool resSzint(ListDigraph &G, ListDigraph::NodeMap<int> &l, ListDigraph::NodeMap<int> &ro,const ListDigraph::NodeMap<int> &d,const ListDigraph::NodeMap<string> &label, ListDigraph::NodeIt &i){
 	
 	for (ListDigraph::OutArcIt a(G,i); a!= INVALID ; ++a){
 		//cerr <<"\t" << label[G.target(a)];
@@ -39,7 +39,7 @@ inline bool resSzint(ListDigraph &G, ListDigraph::NodeMap<int> &l, ListDigraph::
 	
 
 
-void szintezo(ListDigraph &G, const ListDigraph::NodeMap<int> &d , const ListDigraph::NodeMap<int> &label){
+void szintezo(ListDigraph &G, const ListDigraph::NodeMap<int> &d , const ListDigraph::NodeMap<string> &label){
 	ListDigraph::NodeMap<int> l(G);
 	ListDigraph::NodeMap<int> ro(G);
 	ListDigraph::NodeIt hungry(G);

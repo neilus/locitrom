@@ -1,9 +1,12 @@
-all:   eljavito szintezo 
-	./eljavito	2>eljavito.log
-	./szintezo  2>szintezo.log
+all:   clean  eljavitva_parosit 
+	# ./eljavito	2>eljavito.log
+	# -@echo
+	# ./szintezo  2>szintezo.log
+	# -@echo
+	# ./eljavitva_parosit  2>eljavitva_parosit.log
 	-@echo
 clean:
-	rm -rf lemon-1.2 hun.lgf.zip hun-undir.lgf.zip hello gyakorlo uthalozat digraph uthalozat-di uthalozat-undir hello_lemon uthalozat-di.cpp szintezo eljavito *.log
+	rm -rf lemon-1.2 hun.lgf.zip hun-undir.lgf.zip hello gyakorlo uthalozat digraph uthalozat-di uthalozat-undir hello_lemon uthalozat-di.cpp szintezo eljavito *.log *.exe
 
 dist-clean: clean
 	rm -rf lemon lemonpath
@@ -78,6 +81,8 @@ szintezo: lemonpath szintezo.cpp szintezo.h mindenfele.h
 	g++ -o szintezo szintezo.cpp `cat lemonpath`
 eljavito: lemonpath eljavito.cpp eljavito.h mindenfele.h
 	g++ -o eljavito eljavito.cpp `cat lemonpath`
+eljavitva_parosit: lemonpath eljavitva_parosit.cpp eljavito.h mindenfele.h
+	g++ -o eljavitva_parosit eljavitva_parosit.cpp `cat lemonpath`
 uthalozat-undir: lemonpath uthalozat-undir.cpp hun-undir.lgf
 	g++ -o uthalozat-undir uthalozat-undir.cpp  `cat lemonpath`
 uthalozat-di: lemonpath uthalozat-di.cpp hun.lgf

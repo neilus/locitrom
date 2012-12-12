@@ -12,12 +12,12 @@
 #include <lemon/edge_set.h>
 #include <stdlib.h>
 #include <vector>
-
+#include "mindenfele.h"
 using namespace lemon;
 using namespace std;
 
 
-void eljavito(ListDigraph &G, const ListDigraph::NodeMap<int> &d, const ListDigraph::NodeMap<int> &label){
+void eljavito(ListDigraph &G, const ListDigraph::NodeMap<int> &d, const ListDigraph::NodeMap<string> &label){
 	ListDigraph::NodeMap<int> ro(G);
 	
 	/// fel kell bontani a grafot a harom fo reszhalmazra:
@@ -57,9 +57,11 @@ void eljavito(ListDigraph &G, const ListDigraph::NodeMap<int> &d, const ListDigr
 		Bfs<ListDigraph> bfs(G);
 		bfs.run(s);		
 		int _t=0;
-		for ( int i=0;i < gt.size() && !bfs.reached( G.nodeFromId( gt[i]) ); i++)
+		for ( int i=0;i < gt.size() && !bfs.reached( G.nodeFromId( gt[i]) ); i++){
 			_t=i;// keresek egy tobbletes csucsot a bejart csucsok kozott
-
+			//cerr << "DEBUG: " << i << endl;
+		}
+		solveable = _s != _t;
 		ListDigraph::NodeIt t(G,G.nodeFromId( gt[_t] )); 
 		if( t!=INVALID && bfs.reached(t) ){ 
 			// hogyha bejartam a legutobbit akkor eljutottam a gt-be			
@@ -68,30 +70,25 @@ void eljavito(ListDigraph &G, const ListDigraph::NodeMap<int> &d, const ListDigr
 			/// 	annak az utnak az iranyitasat meg kell forditani amit igy talaltam
 			
 			for(Path<ListDigraph>::ArcIt arc(p);arc!=INVALID; ++arc){
-				cerr << "\n megforditom az elt " << label[ G.source(arc) ]<< " es " << label[ G.target(arc) ]<< " kozott\n";
+				cerr << "\n megforditom az elt " << label[ G.source(arc) ]<< " es " << label[ G.target(arc) ]<< " kozott";
 				G.reverseArc(arc);
 			}/**/
 			///		update-elni kell a csucsok hova-tartozasat (melyik osztaly)
 			lt[_s]++;
 			gt[_t]--;
-			
-			if( ro[s] >= d[s] ){ /// ha mar nem hianyos
-				lt.pop_back();
-				if(ro[s] > d[s] ){
-					gt.push_back(G.id(s));
-				}else if(ro[s] == d[s] ){
-					eq.push_back(G.id(s));
-				}
+			cerr << "\t s-id" << _s << " : " << lt[_s] << "/" << G.id(s)<< "\t" << _t << " : "<< gt[_t] << "/" << G.id(t)<< "\t" <<lt.size() << "\t" << gt.size();;
+			if(ro[s] == d[s] ){
+				lt.erase(lt.begin() + _s -1 );
+				eq.push_back(_s);
 			}
-			if(ro[t]==d[t]){ /// ha mar nem tobbletes
-				eq.push_back(G.id(t));
-				int i;
-				for(i=0;i<gt.size() && gt[i]!= G.id(t);i++)
-					;
-				gt.erase(gt.begin() + i -1 );
-			}/**/
+			if(ro[s] == d[t] ){
+				gt.erase(lt.begin() + _t -1 );
+				eq.push_back(_t);
+			}
+			cerr << "\t" <<lt.size() << "\t" << gt.size();
+			
 		}
-		solveable = lt.size() <= gt.size();
+		solveable = solveable && ( lt.size() <= gt.size() );
 
 	}	/// amig ki nem urul a < osztaly, vagy nem talalunk egyaltalan utat a <-bol >-be
 	
@@ -104,4 +101,39 @@ void eljavito(ListDigraph &G, const ListDigraph::NodeMap<int> &d, const ListDigr
 	}
 
 }
+void parosit(ListDigraph &G, ListDigraph::NodeMap<string> &label, ListDigraph::NodeMap<string> &halmaz){
+	ListDigraph::NodeMap<int> d(G);
+	ListDigraph::Node s = G.addNode();
+	ListDigraph::Node t = G.addNode();
+	label[s] = " s-> ";
+	label[t] = " ->t ";
+	d[s] = 0;
+	d[t] = 0;
+	string a="",b="";
+	for (ListDigraph::NodeIt i(G); i!=INVALID; ++i){
+		if( i!= s && i!=t){
+			d[i] = 0;
+			if(a == "")
+				a = halmaz[i];
+			else if (b == "")
+				b = halmaz[i];
+
+			if(halmaz[i] == a){
+				G.addArc(s,i);
+			}else
+			{
+				G.addArc(i,t);
+				d[t] ++;				
+			}
+			d[i] = 1;
+
+
+		}
+		cerr << label[i] <<"\t" << halmaz[i] <<"\t"<< d[i] <<"\t"<< d[t]<<endl;
+	}
+	grafbejaro(G,d,label);
+	eljavito(G,d,label);
+	grafbejaro(G,d,label);
+}
+
 #endif

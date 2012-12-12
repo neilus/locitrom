@@ -12,6 +12,7 @@
 #include <vector>
 #include "eljavito.h"
 #include "mindenfele.h"
+#include <string>
 
 using namespace std;
 using namespace lemon;
@@ -21,7 +22,7 @@ int main(int argc, char*argv[])
  ListDigraph g;
  ListDigraph::Node nodes;
  ListDigraph::Arc	 arcs;
- ListDigraph::NodeMap<int> label(g);
+ ListDigraph::NodeMap<string> label(g);
  ListDigraph::NodeMap<int> d(g);
 
  string filename = ( (argc < 2)?"teszt-szintezo.lgf":argv[1] )  ;

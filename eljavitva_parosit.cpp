@@ -8,9 +8,9 @@
 #include <lemon/bfs.h>
 #include <lemon/edge_set.h>
 #include <stdlib.h>
-#include "szintezo.h"
+#include "eljavito.h"
 #include "mindenfele.h"
-#include <string>
+
 using namespace lemon;
 using namespace std;
 
@@ -23,14 +23,14 @@ int main(int argc, char*argv[])
  ListDigraph::Node nodes;
  ListDigraph::Arc	 arcs;
  ListDigraph::NodeMap<string> label(g);
- ListDigraph::NodeMap<int> d(g);
+ ListDigraph::NodeMap<string> halmaz(g);
 
- string filename = ( (argc < 2)?"teszt-szintezo.lgf":argv[1] )  ;
+ string filename = ( (argc < 2)?"teszt-parosito.lgf":argv[1] )  ;
  cout << "A "<< filename <<" fájlt elkezdem feldolgozni (ez eltarthat egy jódarabig)"<< endl;
  try {
 	 DigraphReader<ListDigraph>(g, filename.c_str())
 		.nodeMap("label",label)
-		.nodeMap("d",d)
+		.nodeMap("halmaz",halmaz)
 		.run();
 	 } catch (Exception& error) { // check if there was any error
     cout << "Error: " << error.what() << endl;
@@ -40,8 +40,8 @@ int main(int argc, char*argv[])
 
  int SumNodes = countNodes(g);
  cout << "\nA gráfban található csúcsok száma: \t\t\t" << SumNodes << endl;
- grafbejaro(g,d,label);
- szintezo(g,d,label);
- grafbejaro(g,d,label);
+ grafbejaro(g,label,halmaz);
+ parosit(g,label,halmaz);
+ grafbejaro(g,label,halmaz);
  return 0;
 }

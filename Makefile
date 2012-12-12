@@ -1,4 +1,4 @@
-all:   clean  eljavitva_parosit 
+all:    eljavitva_parosit 
 	# ./eljavito	2>eljavito.log
 	# -@echo
 	# ./szintezo  2>szintezo.log
@@ -59,6 +59,7 @@ lemon: lemon-1.2
 	@echo `(uname -a|grep -i linux >/dev/null && echo linux) || (uname -a|grep -i cygwin >/dev/null && echo cygwin)|| (uname -a|grep -i MINGW32 >/dev/null && echo windows-mingw) `
 	-@tput sgr0
 	./install-lemon.sh "-`(uname -a|grep -i linux >/dev/null && echo linux) || (uname -a|grep -i cygwin >/dev/null && echo cygwin)|| (uname -a|grep -i MINGW32 >/dev/null && echo windows-mingw) `"
+	rm -rf lemonpath;
 	make lemonpath;
 lemonpath:
 	-@tput setf 6

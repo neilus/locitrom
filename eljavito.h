@@ -48,14 +48,13 @@ void eljavito(ListDigraph &G, const ListDigraph::NodeMap<int> &d, const ListDigr
 	cerr << endl;
 	/// miutan megvan a 3 csucsosztalyunk meg kell vizsgalni a szukseges felteteleket...
 	bool solveable = lt.size() <= gt.size();
-	while( solveable && lt.size()>0 ){
-	/// BFS-el utat kell talalni <-bol >-be
+	while( solveable &&  lt.size() > 0 ){
+		/// BFS-el utat kell talalni <-bol >-be		
 		int _s = lt.size()-1;
 		ListDigraph::NodeIt s(G,G.nodeFromId( lt[_s] ));
-
-
 		Bfs<ListDigraph> bfs(G);
 		bfs.run(s);		
+		
 		int _t=0;
 		for ( int i=0;i < gt.size() && !bfs.reached( G.nodeFromId( gt[i]) ); i++){
 			_t=i;// keresek egy tobbletes csucsot a bejart csucsok kozott
@@ -70,25 +69,28 @@ void eljavito(ListDigraph &G, const ListDigraph::NodeMap<int> &d, const ListDigr
 			/// 	annak az utnak az iranyitasat meg kell forditani amit igy talaltam
 			
 			for(Path<ListDigraph>::ArcIt arc(p);arc!=INVALID; ++arc){
-				cerr << "\n megforditom az elt " << label[ G.source(arc) ]<< " es " << label[ G.target(arc) ]<< " kozott";
+				cerr << "\n megforditom az elt " << label[ G.source(arc) ]<< " es " << label[ G.target(arc) ]<< " kozott"<<endl;
 				G.reverseArc(arc);
 			}/**/
 			///		update-elni kell a csucsok hova-tartozasat (melyik osztaly)
-			lt[_s]++;
-			gt[_t]--;
-			cerr << "\t s-id" << _s << " : " << lt[_s] << "/" << G.id(s)<< "\t" << _t << " : "<< gt[_t] << "/" << G.id(t)<< "\t" <<lt.size() << "\t" << gt.size();;
+			ro[s]++;
+			ro[t]--;
+
+			
 			if(ro[s] == d[s] ){
 				lt.erase(lt.begin() + _s -1 );
 				eq.push_back(_s);
 			}
-			if(ro[s] == d[t] ){
+			if(ro[t] == d[t] ){
 				gt.erase(lt.begin() + _t -1 );
 				eq.push_back(_t);
 			}
+
 			cerr << "\t" <<lt.size() << "\t" << gt.size();
 			
 		}
-		solveable = solveable && ( lt.size() <= gt.size() );
+
+		solveable = solveable || ( lt.size() <= gt.size() );
 
 	}	/// amig ki nem urul a < osztaly, vagy nem talalunk egyaltalan utat a <-bol >-be
 	

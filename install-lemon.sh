@@ -10,6 +10,7 @@ else
 	tput setf 2 || true
 	echo "a lemon elofeltetelvizsgalaton sikeresen atment..."
 	tput sgr0||true
+	make
 	if [ $? != 0 ];then
 		tput setf 4||true
 		echo "elhasalt LEMON forditasa!!!"
@@ -27,5 +28,5 @@ else
 		fi
 	fi 	
 fi 
-sgr0
+tput sgr0
 cp -r "$workdir/lemon" "$workdir/lemon$1"

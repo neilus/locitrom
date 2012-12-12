@@ -56,7 +56,6 @@ lemon: lemon-1.2
 	@echo `(uname -a|grep -i linux >/dev/null && echo linux) || (uname -a|grep -i cygwin >/dev/null && echo cygwin)|| (uname -a|grep -i MINGW32 >/dev/null && echo windows-mingw) `
 	-@tput sgr0
 	./install-lemon.sh "-`(uname -a|grep -i linux >/dev/null && echo linux) || (uname -a|grep -i cygwin >/dev/null && echo cygwin)|| (uname -a|grep -i MINGW32 >/dev/null && echo windows-mingw) `"
-	rm -rf lemon-1.2
 	make lemonpath;
 lemonpath:
 	-@tput setf 6

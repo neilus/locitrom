@@ -1,9 +1,9 @@
-all:    eljavitva_parosit 
-	# ./eljavito	2>eljavito.log
-	# -@echo
-	# ./szintezo  2>szintezo.log
-	# -@echo
-	# ./eljavitva_parosit  2>eljavitva_parosit.log
+all:    eljavitva_parosit eljavito szintezo
+	./eljavito	2>eljavito.log
+	-@echo
+	./szintezo  2>szintezo.log
+	-@echo
+	./eljavitva_parosit  2>eljavitva_parosit.log
 	-@echo
 clean:
 	rm -rf lemon-1.2 hun.lgf.zip hun-undir.lgf.zip hello gyakorlo uthalozat digraph uthalozat-di uthalozat-undir hello_lemon uthalozat-di.cpp szintezo eljavito *.log *.exe

@@ -48,13 +48,13 @@ void eljavito(ListDigraph &G, const ListDigraph::NodeMap<int> &d, const ListDigr
 	cerr << endl;
 	/// miutan megvan a 3 csucsosztalyunk meg kell vizsgalni a szukseges felteteleket...
 	bool solveable = lt.size() <= gt.size();
-	while( solveable &&  lt.size() > 0 ){
+	while( solveable &&  lt.size() != 0 && gt.size() != 0 ) {
 		/// BFS-el utat kell talalni <-bol >-be		
 		int _s = lt.size()-1;
 		ListDigraph::NodeIt s(G,G.nodeFromId( lt[_s] ));
 		Bfs<ListDigraph> bfs(G);
 		bfs.run(s);		
-		
+
 		int _t=0;
 		for ( int i=0;i < gt.size() && !bfs.reached( G.nodeFromId( gt[i]) ); i++){
 			_t=i;// keresek egy tobbletes csucsot a bejart csucsok kozott
@@ -78,18 +78,29 @@ void eljavito(ListDigraph &G, const ListDigraph::NodeMap<int> &d, const ListDigr
 
 			
 			if(ro[s] == d[s] ){
-				lt.erase(lt.begin() + _s -1 );
-				eq.push_back(_s);
+				lt.erase( lt.begin()+_s -1);
+				eq.push_back(G.id(s));
 			}
 			if(ro[t] == d[t] ){
-				gt.erase(lt.begin() + _t -1 );
-				eq.push_back(_t);
+				gt.erase(gt.begin()+_t-1);
+				eq.push_back(G.id(t));
 			}
 
-			cerr << "\t" <<lt.size() << "\t" << gt.size();
+			cerr << "\t" <<lt.size() << "\t" << gt.size()<<endl;
 			
 		}
-
+		cerr << "A deficitesek: ";
+		for(int i=0; i < lt.size(); i++)
+			cerr << label[ G.nodeFromId( lt[i] ) ] << "\t";
+		cerr << endl;
+		cerr << "A jok: ";
+		for (int i=0; i < eq.size(); i++)
+			cerr << label[ G.nodeFromId( eq[i] ) ] << "\t";
+		cerr << endl;
+		cerr << "A tobbletesek: ";
+		for (int i=0; i < gt.size(); i++)
+			cerr << label[ G.nodeFromId( gt[i] ) ] << "\t";
+		cerr << endl;
 		solveable = solveable || ( lt.size() <= gt.size() );
 
 	}	/// amig ki nem urul a < osztaly, vagy nem talalunk egyaltalan utat a <-bol >-be
@@ -131,6 +142,7 @@ void parosit(ListDigraph &G, ListDigraph::NodeMap<string> &label, ListDigraph::N
 
 
 		}
+
 		cerr << label[i] <<"\t" << halmaz[i] <<"\t"<< d[i] <<"\t"<< d[t]<<endl;
 	}
 	grafbejaro(G,d,label);

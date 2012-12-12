@@ -1,1 +1,1 @@
- -I lemon-MinGW/include -L lemon-MinGW/lib -lemon
+ -lemon

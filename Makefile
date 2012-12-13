@@ -1,21 +1,24 @@
-all:    eljavitva_parosit eljavito szintezo szintezve_parosit
-	./eljavito	2>eljavito.log
-	-@echo
-	./szintezo  2>szintezo.log
-	-@echo
-	./eljavitva_parosit  2>eljavitva_parosit.log
-	-@echo
-	./szintezve_parosit 2>szintezve_parosit.log
-	-@echo
+all: dist-clean lemon szintezo eljavito szintezve_parosit eljavitva_parosit
+
+none:
+	# eljavitva_parosit eljavito szintezo szintezve_parosit
+	# ./eljavito	2>eljavito.log
+	# -@echo
+	# ./szintezo  2>szintezo.log
+	# -@echo
+	# ./eljavitva_parosit  2>eljavitva_parosit.log
+	# -@echo
+	# ./szintezve_parosit 2>szintezve_parosit.log
+	# -@echo
 clean:
-	rm -rf lemon-1.2 hun.lgf.zip hun-undir.lgf.zip hello gyakorlo uthalozat digraph uthalozat-di uthalozat-undir hello_lemon uthalozat-di.cpp szintezo eljavito *.log *.exe
+	rm -rf  hello gyakorlo uthalozat digraph uthalozat-di uthalozat-undir hello_lemon uthalozat-di.cpp szintezo eljavito *.log *.exe *.stackdump
 
 dist-clean: clean
-	rm -rf lemon lemonpath
+	rm -rf lemon lemonpath lemon-1.2 
 	echo " -lemon">lemonpath
 
 deep-clean: dist-clean
-	rm -rf hun.lgf hun-undir.lgf lemon* 
+	rm -rf hun.lgf hun-undir.lgf hun.lgf.zip hun-undir.lgf.zip lemon-*
 
 linux-lib: lemon-linux
 	rm -rf lemon
@@ -55,21 +58,18 @@ lemon: lemon-1.2
 	-@tput setf 6
 	@echo "Most installalok lokalisan egy lemon-t"
 	-@tput sgr0
-	rm -rf lemon
 	@echo -n "ide rakom a lemon backupjat"
 	-@tput setf 
 	@echo `(uname -a|grep -i linux >/dev/null && echo linux) || (uname -a|grep -i cygwin >/dev/null && echo cygwin)|| (uname -a|grep -i MINGW32 >/dev/null && echo windows-mingw) `
 	-@tput sgr0
 	./install-lemon.sh "-`(uname -a|grep -i linux >/dev/null && echo linux) || (uname -a|grep -i cygwin >/dev/null && echo cygwin)|| (uname -a|grep -i MINGW32 >/dev/null && echo windows-mingw) `"
-	rm -rf lemonpath;
-	make lemonpath;
+	
 lemonpath:
-	-@tput setf 6
-	@echo "bellitom a lemon helyet a lokalis lemn alkonyvtarra"
+	-@tput setf 4
+	@echo "Ha nincs LEMON konfiguralva, add ki a make lemon parancsot, mely beallitja a lemonpath-ot is a forditonak!!!"
 	-@tput sgr0
-	-@tput setf 2
-	@echo '-I lemon/include -L lemon/lib -lemon'|tee lemonpath
-	-@tput sgr0
+	
+
 hello_lemon: lemonpath hello_lemon.cc
 	g++ -o hello_lemon hello_lemon.cc  `cat lemonpath`
 digraph: lemonpath digraph.cpp 

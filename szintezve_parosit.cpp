@@ -24,6 +24,7 @@ int main(int argc, char*argv[])
  ListDigraph::Arc	 arcs;
  ListDigraph::NodeMap<string> label(g);
  ListDigraph::NodeMap<string> halmaz(g);
+ ListDigraph::NodeMap<int> d(g);
 
  string filename = ( (argc < 2)?"teszt-parosito.lgf":argv[1] )  ;
  cout << "A "<< filename <<" fájlt elkezdem feldolgozni (ez eltarthat egy jódarabig)"<< endl;
@@ -41,7 +42,10 @@ int main(int argc, char*argv[])
  int SumNodes = countNodes(g);
  cout << "\nA gráfban található csúcsok száma: \t\t\t" << SumNodes << endl;
  grafbejaro(g,label,halmaz);
- parosit(g,label,halmaz);
+ preParositarosit(g,label,halmaz,d);
+ grafbejaro(G,d,label);
+ szintezo(G,d,label);
+ grafbejaro(G,d,label);
  grafbejaro(g,label,halmaz);
  return 0;
 }

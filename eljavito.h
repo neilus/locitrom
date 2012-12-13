@@ -12,7 +12,7 @@
 #include <lemon/edge_set.h>
 #include <stdlib.h>
 #include <vector>
-#include "mindenfele.h"
+
 using namespace lemon;
 using namespace std;
 
@@ -105,7 +105,7 @@ void eljavito(ListDigraph &G, const ListDigraph::NodeMap<int> &d, const ListDigr
 
 	}	/// amig ki nem urul a < osztaly, vagy nem talalunk egyaltalan utat a <-bol >-be
 	
-	if(!solveable){
+	if(!solveable && lt.size()!=0 ){
 		cerr<<endl<< "nincs megoldas :( \na serto csucshalmaz:\n";
 		for(int i=0; i<lt.size();i++){
 			cerr << label[ G.nodeFromId( lt[i] ) ] << "\t";
@@ -113,41 +113,6 @@ void eljavito(ListDigraph &G, const ListDigraph::NodeMap<int> &d, const ListDigr
 		cerr << endl;
 	}
 
-}
-void parosit(ListDigraph &G, ListDigraph::NodeMap<string> &label, ListDigraph::NodeMap<string> &halmaz){
-	ListDigraph::NodeMap<int> d(G);
-	ListDigraph::Node s = G.addNode();
-	ListDigraph::Node t = G.addNode();
-	label[s] = " s-> ";
-	label[t] = " ->t ";
-	d[s] = 0;
-	d[t] = 0;
-	string a="",b="";
-	for (ListDigraph::NodeIt i(G); i!=INVALID; ++i){
-		if( i!= s && i!=t){
-			d[i] = 0;
-			if(a == "")
-				a = halmaz[i];
-			else if (b == "")
-				b = halmaz[i];
-
-			if(halmaz[i] == a){
-				G.addArc(s,i);
-			}else
-			{
-				G.addArc(i,t);
-				d[t] ++;				
-			}
-			d[i] = 1;
-
-
-		}
-
-		cerr << label[i] <<"\t" << halmaz[i] <<"\t"<< d[i] <<"\t"<< d[t]<<endl;
-	}
-	grafbejaro(G,d,label);
-	eljavito(G,d,label);
-	grafbejaro(G,d,label);
 }
 
 #endif

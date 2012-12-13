@@ -1,8 +1,18 @@
 #!/bin/bash
 workdir=`pwd`
 echo $workdir
+lemonpath="$workdir/lemon"
 cd lemon-1.2
-./configure --prefix="$workdir/lemon"
+echo `uname -a`|grep -i "mingw"
+if [ $? == 0 ];then
+	lemonpath="c:\lemon"
+else
+	lemonpath="$workdir/lemon"
+fi
+tput setf 4 || true
+echo $lemonpath
+tput sgr0||true
+./configure --prefix="$lemonpath"
 if [ $? != 0 ];then
 	tput setf 4 ||true
 	echo "elhasalt LEMON TELEPITESE az elofelteteleknel!!!"
@@ -29,4 +39,8 @@ else
 	fi 	
 fi 
 tput sgr0
-cp -r "$workdir/lemon" "$workdir/lemon$1"
+cd $workdir
+cp -r "$lemonpath" "$workdir/lemon$1-bak"
+tput setf 2||true
+echo "-I $lemonpath/include -L $lemonpath/lib -lemon"|tee lemonpath
+tput sgr0||true

@@ -48,19 +48,18 @@ void eljavito(ListDigraph &G, const ListDigraph::NodeMap<int> &d, const ListDigr
 	cerr << endl;
 	/// miutan megvan a 3 csucsosztalyunk meg kell vizsgalni a szukseges felteteleket...
 	bool solveable = lt.size() <= gt.size();
-	while( solveable &&  lt.size() != 0 && gt.size() != 0 ) {
-		/// BFS-el utat kell talalni <-bol >-be		
+	while( solveable && lt.size()>0 ){
+	/// BFS-el utat kell talalni <-bol >-be
 		int _s = lt.size()-1;
 		ListDigraph::NodeIt s(G,G.nodeFromId( lt[_s] ));
+
+
 		Bfs<ListDigraph> bfs(G);
 		bfs.run(s);		
-
 		int _t=0;
-		for ( int i=0;i < gt.size() && !bfs.reached( G.nodeFromId( gt[i]) ); i++){
+		for ( int i=0;i < gt.size() && !bfs.reached( G.nodeFromId( gt[i]) ); i++)
 			_t=i;// keresek egy tobbletes csucsot a bejart csucsok kozott
-			//cerr << "DEBUG: " << i << endl;
-		}
-		solveable = _s != _t;
+
 		ListDigraph::NodeIt t(G,G.nodeFromId( gt[_t] )); 
 		if( t!=INVALID && bfs.reached(t) ){ 
 			// hogyha bejartam a legutobbit akkor eljutottam a gt-be			
@@ -69,45 +68,34 @@ void eljavito(ListDigraph &G, const ListDigraph::NodeMap<int> &d, const ListDigr
 			/// 	annak az utnak az iranyitasat meg kell forditani amit igy talaltam
 			
 			for(Path<ListDigraph>::ArcIt arc(p);arc!=INVALID; ++arc){
-				cerr << "\n megforditom az elt " << label[ G.source(arc) ]<< " es " << label[ G.target(arc) ]<< " kozott"<<endl;
+				cerr << "\n megforditom az elt " << label[ G.source(arc) ]<< " es " << label[ G.target(arc) ]<< " kozott\n";
 				G.reverseArc(arc);
 			}/**/
 			///		update-elni kell a csucsok hova-tartozasat (melyik osztaly)
-			ro[s]++;
-			ro[t]--;
-
+			lt[_s]++;
+			gt[_t]--;
 			
-			if(ro[s] == d[s] ){
-				lt.erase( lt.begin()+_s -1);
-				eq.push_back(G.id(s));
+			if( ro[s] >= d[s] ){ /// ha mar nem hianyos
+				lt.pop_back();
+				if(ro[s] > d[s] ){
+					gt.push_back(G.id(s));
+				}else if(ro[s] == d[s] ){
+					eq.push_back(G.id(s));
+				}
 			}
-			if(ro[t] == d[t] ){
-				gt.erase(gt.begin()+_t-1);
+			if(ro[t]==d[t]){ /// ha mar nem tobbletes
 				eq.push_back(G.id(t));
-			}
-
-			cerr << "\t" <<lt.size() << "\t" << gt.size()<<endl;
-			
+				int i;
+				for(i=0;i<gt.size() && gt[i]!= G.id(t);i++)
+					;
+				gt.erase(gt.begin() + i -1 );
+			}/**/
 		}
-		/*
-		cerr << "A deficitesek: ";
-		for(int i=0; i < lt.size(); i++)
-			cerr << label[ G.nodeFromId( lt[i] ) ] << "\t";
-		cerr << endl;
-		cerr << "A jok: ";
-		for (int i=0; i < eq.size(); i++)
-			cerr << label[ G.nodeFromId( eq[i] ) ] << "\t";
-		cerr << endl;
-		cerr << "A tobbletesek: ";
-		for (int i=0; i < gt.size(); i++)
-			cerr << label[ G.nodeFromId( gt[i] ) ] << "\t";
-		cerr << endl;
-		/**/
-		solveable = solveable && ( lt.size() <= gt.size() );
+		solveable = lt.size() <= gt.size();
 
 	}	/// amig ki nem urul a < osztaly, vagy nem talalunk egyaltalan utat a <-bol >-be
 	
-	if(!solveable && lt.size()!=0 ){
+	if(!solveable){
 		cerr<<endl<< "nincs megoldas :( \na serto csucshalmaz:\n";
 		for(int i=0; i<lt.size();i++){
 			cerr << label[ G.nodeFromId( lt[i] ) ] << "\t";
@@ -116,5 +104,4 @@ void eljavito(ListDigraph &G, const ListDigraph::NodeMap<int> &d, const ListDigr
 	}
 
 }
-
 #endif

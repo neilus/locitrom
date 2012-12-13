@@ -1,1 +1,1 @@
- -lemon
+-I /home/neilus/masik-lemon/lemon/include -L /home/neilus/masik-lemon/lemon/lib -lemon

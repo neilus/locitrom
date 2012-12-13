@@ -89,6 +89,7 @@ void eljavito(ListDigraph &G, const ListDigraph::NodeMap<int> &d, const ListDigr
 			cerr << "\t" <<lt.size() << "\t" << gt.size()<<endl;
 			
 		}
+		/*
 		cerr << "A deficitesek: ";
 		for(int i=0; i < lt.size(); i++)
 			cerr << label[ G.nodeFromId( lt[i] ) ] << "\t";
@@ -101,7 +102,8 @@ void eljavito(ListDigraph &G, const ListDigraph::NodeMap<int> &d, const ListDigr
 		for (int i=0; i < gt.size(); i++)
 			cerr << label[ G.nodeFromId( gt[i] ) ] << "\t";
 		cerr << endl;
-		solveable = solveable || ( lt.size() <= gt.size() );
+		/**/
+		solveable = solveable && ( lt.size() <= gt.size() );
 
 	}	/// amig ki nem urul a < osztaly, vagy nem talalunk egyaltalan utat a <-bol >-be
 	

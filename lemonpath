@@ -1,1 +1,1 @@
--I c:\lemon/include -L c:\lemon/lib -lemon
+ -lemon

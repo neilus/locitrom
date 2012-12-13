@@ -34,7 +34,7 @@ void grafbejaro(const ListDigraph &G,const ListDigraph::NodeMap<string> &label, 
 		}
 	}
 }
-void preParositarosit(ListDigraph &G, ListDigraph::NodeMap<string> &label, ListDigraph::NodeMap<string> &halmaz, ListDigraph::NodeMap<int> &d{
+void preParositarosit(ListDigraph &G, ListDigraph::NodeMap<string> &label, ListDigraph::NodeMap<string> &halmaz, ListDigraph::NodeMap<int> &d){
 	
 	ListDigraph::Node s = G.addNode();
 	ListDigraph::Node t = G.addNode();

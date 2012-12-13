@@ -1,15 +1,13 @@
-all: dist-clean lemon szintezo eljavito szintezve_parosit eljavitva_parosit
-
-none:
+all: szintezo eljavito szintezve_parosit eljavitva_parosit
 	# eljavitva_parosit eljavito szintezo szintezve_parosit
 	# ./eljavito	2>eljavito.log
 	# -@echo
 	# ./szintezo  2>szintezo.log
-	# -@echo
-	# ./eljavitva_parosit  2>eljavitva_parosit.log
-	# -@echo
-	# ./szintezve_parosit 2>szintezve_parosit.log
-	# -@echo
+	 -@echo
+	 ./eljavitva_parosit  2>eljavitva_parosit.log
+	 -@echo
+	 ./szintezve_parosit 2>szintezve_parosit.log
+	 -@echo
 clean:
 	rm -rf  hello gyakorlo uthalozat digraph uthalozat-di uthalozat-undir hello_lemon uthalozat-di.cpp szintezo eljavito *.log *.exe *.stackdump
 

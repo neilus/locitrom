@@ -43,5 +43,6 @@ int main(int argc, char*argv[])
  grafbejaro(g,d,label);
  szintezo(g,d,label);
  grafbejaro(g,d,label);
+ cout << endl;
  return 0;
 }

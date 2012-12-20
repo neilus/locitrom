@@ -48,9 +48,9 @@ void eljavito(ListDigraph &G, const ListDigraph::NodeMap<int> &d, const ListDigr
 	cerr << endl;
 	/// miutan megvan a 3 csucsosztalyunk meg kell vizsgalni a szukseges felteteleket...
 	bool solveable = lt.size() <= gt.size();
-	while( solveable &&  lt.size() != 0 && gt.size() != 0 ) {
+	while( solveable &&  lt.size() > 0 ) {
 		/// BFS-el utat kell talalni <-bol >-be		
-		int _s = lt.size()-1;
+		const int _s = lt.size()-1;
 		ListDigraph::NodeIt s(G,G.nodeFromId( lt[_s] ));
 		Bfs<ListDigraph> bfs(G);
 		bfs.run(s);		
@@ -60,8 +60,9 @@ void eljavito(ListDigraph &G, const ListDigraph::NodeMap<int> &d, const ListDigr
 			_t=i;// keresek egy tobbletes csucsot a bejart csucsok kozott
 			//cerr << "DEBUG: " << i << endl;
 		}
-		solveable = _s != _t;
+		
 		ListDigraph::NodeIt t(G,G.nodeFromId( gt[_t] )); 
+//		solveable = _s != _t;
 		if( t!=INVALID && bfs.reached(t) ){ 
 			// hogyha bejartam a legutobbit akkor eljutottam a gt-be			
 			Path<ListDigraph> p = bfs.path(t);
@@ -76,20 +77,20 @@ void eljavito(ListDigraph &G, const ListDigraph::NodeMap<int> &d, const ListDigr
 			ro[s]++;
 			ro[t]--;
 
-			
+			cerr <<"_t: " <<_t << "\t_s: "	<< _s <<endl;
 			if(ro[s] == d[s] ){
-				lt.erase( lt.begin()+_s -1);
+				lt.erase( lt.begin()+_s );
 				eq.push_back(G.id(s));
 			}
 			if(ro[t] == d[t] ){
-				gt.erase(gt.begin()+_t-1);
+				gt.erase(gt.begin()+_t);
 				eq.push_back(G.id(t));
 			}
 
 			cerr << "\t" <<lt.size() << "\t" << gt.size()<<endl;
 			
 		}
-		/*
+		
 		cerr << "A deficitesek: ";
 		for(int i=0; i < lt.size(); i++)
 			cerr << label[ G.nodeFromId( lt[i] ) ] << "\t";
@@ -102,18 +103,20 @@ void eljavito(ListDigraph &G, const ListDigraph::NodeMap<int> &d, const ListDigr
 		for (int i=0; i < gt.size(); i++)
 			cerr << label[ G.nodeFromId( gt[i] ) ] << "\t";
 		cerr << endl;
-		/**/
+		
 		solveable = solveable && ( lt.size() <= gt.size() );
 
 	}	/// amig ki nem urul a < osztaly, vagy nem talalunk egyaltalan utat a <-bol >-be
 	
-	if(!solveable && lt.size()!=0 ){
+	if(!solveable || lt.size()!=0 ){
 		cerr<<endl<< "nincs megoldas :( \na serto csucshalmaz:\n";
 		for(int i=0; i<lt.size();i++){
 			cerr << label[ G.nodeFromId( lt[i] ) ] << "\t";
 		}
-		cerr << endl;
-	}
+
+	}else 	cerr << "megoldottam";
+
+	cerr << endl;
 
 }
 

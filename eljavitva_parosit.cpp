@@ -41,10 +41,22 @@ int main(int argc, char*argv[])
  int SumNodes = countNodes(g);
  cout << "\nA gráfban található csúcsok száma: \t\t\t" << SumNodes << endl;
  grafbejaro(g,label,halmaz);
+ cerr << endl;
+ grafbejaro(g,d,label);
+ cerr << endl;
+ 
  preParositarosit(g,label,halmaz,d);
- grafbejaro(g,d,label);
- eljavito(g,d,label);
- grafbejaro(g,d,label);
+ cerr << endl;
  grafbejaro(g,label,halmaz);
+ cerr << endl;
+ grafbejaro(g,d,label);
+ cerr << endl;
+ 
+ eljavito(g,d,label);
+ cerr << endl;
+ grafbejaro(g,d,label);
+ cerr << endl;
+ grafbejaro(g,label,halmaz);
+ cerr <<endl;
  return 0;
 }

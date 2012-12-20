@@ -1,13 +1,13 @@
 @nodes
 label	d	halmaz
 1	1	B
-2	1       B
-3	1       B
-4	1       B
-5	1 	A
-6	1 	A
-7	1 	A
-8	1 	A
+2	1	B
+3	1	B
+4	1	B
+5	1	A
+6	1	A
+7	1	A
+8	1	A
 
 @arcs
 		-
@@ -15,3 +15,4 @@ label	d	halmaz
 2	7	0
 6	3	0
 5	4	0
+5	3	0

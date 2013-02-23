@@ -18,7 +18,7 @@ void grafbejaro(const ListDigraph &G, const ListDigraph::NodeMap<int> &d,const L
 
 	cout << endl << " Label(i) \t|\tro(i)\t|\td(i)\t|\tide mutatnak elek i-bol "<<endl;
 	for(ListDigraph::NodeIt i(G); i!=INVALID;++i){
-		cout << endl<< label[i] << "\t|\t" << countInArcs(G,i) << "\t|\t" << d[i] << "\t|";
+		cout << endl<< label[i] << "\t\t|\t" << countInArcs(G,i) << "\t|\t" << d[i] << "\t|";
 		for(ListDigraph::OutArcIt j(G,i); j!=INVALID; ++j){
 			cout <<"\t"<< label[ G.target(j) ];
 		}

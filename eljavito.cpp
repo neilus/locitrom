@@ -42,7 +42,10 @@ int main(int argc, char*argv[])
  cout << "\nA gráfban található csúcsok száma: \t\t\t" << SumNodes << endl;
  
  grafbejaro(g,d,label);
+ cerr << endl;
  eljavito(g,d,label);
+ cerr << endl;
  grafbejaro(g,d,label);
+ cerr << endl;
  return 0;
 }

@@ -52,7 +52,7 @@ void eljavito(ListDigraph &G, const ListDigraph::NodeMap<int> &d, const ListDigr
 		/// BFS-el utat kell talalni <-bol >-be		
 		const int _s = lt.size()-1;
 		ListDigraph::NodeIt s(G,G.nodeFromId( lt[_s] ));
-		Bfs<ListDigraph> bfs(G);
+		Bfs<ListDigraph> bfs(G);Ö
 		bfs.run(s);		
 
 		int _t=0;

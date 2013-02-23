@@ -1,1 +1,1 @@
- -lemon
+-I /var/lib/stickshift/dc0be777265d4dbb92df77a7bac4f35d/app-root/data/359662/lemon/include -L /var/lib/stickshift/dc0be777265d4dbb92df77a7bac4f35d/app-root/data/359662/lemon/lib -lemon

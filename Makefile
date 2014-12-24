@@ -1,21 +1,18 @@
-all: szintezo eljavito szintezve_parosit eljavitva_parosit
-	@./eljavito	2>eljavito.log
-	-@echo
-	@./szintezo  2>szintezo.log
-	-@echo
-	@./eljavitva_parosit  2>eljavitva_parosit.log
-	-@echo
-	@./szintezve_parosit 2>szintezve_parosit.log
-	-@echo
+all: lemon nacl_sdk
+	make clean
+	cd nacl_sdk && ./naclsdk update 
+	cd nacl_sdk && ./naclsdk update
+	
 clean:
 	rm -rf  hello gyakorlo uthalozat digraph uthalozat-di uthalozat-undir hello_lemon uthalozat-di.cpp szintezo eljavito *.log *.exe *.stackdump szintezve_parosit eljavitva_parosit
+	rm -rf *.tar.gz *.tar.bz *.zip *bak
 
-dist-clean: clean
+dist-clean: clean deep-clean
 	rm -rf lemon lemonpath lemon-1.2 
 	echo " -lemon">lemonpath
 
-deep-clean: dist-clean
-	rm -rf hun.lgf hun-undir.lgf hun.lgf.zip hun-undir.lgf.zip lemon-*
+deep-clean: 
+	rm -rf hun.lgf hun-undir.lgf hun.lgf.zip hun-undir.lgf.zip lemon-* nacl*
 
 linux-lib: lemon-linux
 	rm -rf lemon
@@ -66,6 +63,10 @@ lemonpath:
 	@echo "Ha nincs LEMON konfiguralva, add ki a make lemon parancsot, mely beallitja a lemonpath-ot is a forditonak!!!"
 	-@tput sgr0
 	
+nacl_sdk.zip:
+	wget http://storage.googleapis.com/nativeclient-mirror/nacl/nacl_sdk/nacl_sdk.zip
+nacl_sdk: nacl_sdk.zip
+	unzip nacl_sdk.zip
 
 hello_lemon: lemonpath hello_lemon.cc
 	g++ -o hello_lemon hello_lemon.cc  `cat lemonpath`
